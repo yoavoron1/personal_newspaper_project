@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body { font-family: "Heebo", system-ui, sans-serif; }
+    </style>
+  </head>
+  <body class="bg-stone-100 text-slate-800">
+    <main class="mx-auto max-w-5xl px-4 py-8 md:py-12">
+      <section class="text-center">
+        <div class="mx-auto mb-6 h-1 w-24 rounded-full bg-blue-900/80"></div>
+        <p class="mb-2 text-xs tracking-[0.35em] text-blue-900/90 md:text-sm">PERSONAL WEEKLY EDITION</p>
+        <h1 class="text-5xl font-extrabold leading-tight text-blue-900 md:text-7xl">{{ title }}</h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">{{ intro }}</p>
+        <div class="mx-auto mt-6 flex w-28 items-center justify-center gap-2 text-blue-900">
+          <span class="h-px w-10 bg-blue-900/30"></span>
+          <span class="h-2 w-2 rounded-full bg-blue-900"></span>
+          <span class="h-px w-10 bg-blue-900/30"></span>
+        </div>
+      </section>
+
+      {% if articles and articles|length > 0 %}
+      {% set main_article = articles[0] %}
+      <section class="mt-10 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <div class="aspect-[16/8] w-full bg-slate-200">
+          {% if main_article.image %}
+          <img src="{{ main_article.image }}" alt="{{ main_article.title }}" class="h-full w-full object-cover" />
+          {% endif %}
+        </div>
+        <div class="p-6 md:p-10">
+          <div class="mb-4 flex items-center gap-3 text-sm text-slate-500">
+            <span class="rounded-full bg-blue-100 px-4 py-1 font-semibold text-blue-900">FEATURED</span>
+            <span>&bull;</span>
+            <span>5 min read</span>
+          </div>
+          <h2 class="text-3xl font-extrabold leading-tight text-blue-900 md:text-5xl">{{ main_article.title }}</h2>
+          <p class="mt-5 text-xl leading-relaxed text-slate-600">{{ main_article.summary }}</p>
+          <div class="mt-7 rounded-2xl border-r-4 border-blue-900 bg-amber-50 p-5">
+            <p class="text-sm font-bold text-blue-900">הערה אישית</p>
+            <p class="mt-2 text-lg leading-relaxed text-slate-700">
+              {{ main_article.commentary or main_article.personal_note }}
+            </p>
+          </div>
+          {% if main_article.url %}
+          <a
+            href="{{ main_article.url }}"
+            target="_blank"
+            class="mt-7 inline-flex rounded-full bg-blue-900 px-8 py-4 text-2xl font-bold text-white transition hover:bg-blue-950"
+          >
+            Read Full Story
+          </a>
+          {% endif %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if articles and articles|length > 1 %}
+      <section class="mt-12">
+        <div class="mb-8 flex items-center gap-4 text-center">
+          <span class="h-px flex-1 bg-slate-300"></span>
+          <h3 class="text-3xl font-extrabold text-blue-900">More Stories For You</h3>
+          <span class="h-px flex-1 bg-slate-300"></span>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          {% for article in articles[1:] %}
+          <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="aspect-[16/10] bg-slate-200">
+              {% if article.image %}
+              <img src="{{ article.image }}" alt="{{ article.title }}" class="h-full w-full object-cover" />
+              {% endif %}
+            </div>
+            <div class="p-5 md:p-6">
+              <h4 class="text-4xl font-extrabold leading-tight text-blue-900">{{ article.title }}</h4>
+              <p class="mt-3 text-2xl leading-relaxed text-slate-600">{{ article.summary }}</p>
+              <div class="mt-4 rounded-xl bg-amber-50 p-4">
+                <p class="text-sm font-bold text-blue-900">Commentary</p>
+                <p class="mt-1 text-lg text-slate-700">{{ article.commentary or article.personal_note }}</p>
+              </div>
+              {% if article.url %}
+              <a href="{{ article.url }}" target="_blank" class="mt-4 inline-flex text-2xl font-bold text-blue-900">
+                Read More &rarr;
+              </a>
+              {% endif %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Newspaper</title>
+  <style>
+    /* פה תדביק/תייבא את CSS שלך מפיגמה */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #1f2937;
+      padding: 20px;
+    }
+    #news-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 24px;
+    }
+    .article { margin-bottom: 24px; }
+    .article h2 { margin-top: 0; }
+  </style>
+</head>
+<body>
+  <div id="news-container">
+    <h1>עיתון מותאם אישית</h1>
+    <div id="articles-list">טוען...</div>
+  </div>
+
+  <script>
+    async function fetchNewspaper() {
+      const response = await fetch('/newspaper');
+      const data = await response.json();
+      const container = document.getElementById('articles-list');
+      if (data.error) {
+        container.innerHTML = '<p style="color:red;">'+data.error+'</p>';
+        return;
+      }
+
+      container.innerHTML = `
+        <h2>${data.title || 'הכותרת שלך'}</h2>
+        <p>${data.intro || ''}</p>
+      `;
+
+      (data.articles || []).forEach((article, i) => {
+        const card = document.createElement('div');
+        card.className = 'article';
+        card.innerHTML = `
+          <h3>${article.title || 'כתבה '+(i+1)}</h3>
+          <p><strong>תקציר:</strong> ${article.summary || ''}</p>
+          <p>${article.details || ''}</p>
+          <p><em>${article.personal_note || ''}</em></p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    fetchNewspaper().catch(err => {
+      document.getElementById('articles-list').innerText = 'שגיאה בטעינת הנתונים: ' + err;
+    });
+  </script>
+</body>
+</html>
