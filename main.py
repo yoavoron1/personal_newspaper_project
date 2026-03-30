@@ -87,7 +87,7 @@ def create_newspaper_data() -> Optional[Tuple[Dict, List[Dict]]]:
 def main() -> Optional[Dict]:
     """מריץ את הזרימה המלאה: יצירה ושליחת מייל."""
     try:
-        settings = get_settings()
+        settings = get_settings(require_email=True)
         result = create_newspaper_data()
     except Exception as exc:
         print(f"\n[ERROR] Failed during setup/generation: {exc}")
