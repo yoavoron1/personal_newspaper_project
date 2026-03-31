@@ -5,14 +5,19 @@ import os
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+# Load .env only when running locally — Railway injects variables directly into the environment
+if not os.getenv("RAILWAY_ENVIRONMENT"):
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(Path(__file__).resolve().parent / ".env")
+    except Exception:
+        pass
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
@@ -81,7 +86,7 @@ def get_newspaper():
 
 
 @app.post("/update-news")
-async def update_news(request: Request, api_key: str = None):
+async def update_news(request: Request, api_key: str = Query(None)):
     """מקבל נתוני עיתון חדשים מהסקריפט המקומי ושומר אותם."""
     expected_key = os.getenv("API_KEY", "")
     print(f"Received api_key starts with: {api_key[:3] if api_key else 'NONE'}... | expected starts with: {expected_key[:3] if expected_key else 'NONE'}...")
