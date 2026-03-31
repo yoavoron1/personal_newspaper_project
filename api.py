@@ -59,6 +59,17 @@ def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List
     return enriched
 
 
+@app.get("/debug-key")
+def debug_key():
+    """נקודת קצה זמנית לאבחון — מראה אם API_KEY טעון בצד השרת."""
+    key = os.getenv("API_KEY", "")
+    return {
+        "api_key_set": bool(key),
+        "api_key_preview": key[:3] + "..." if key else "NOT SET",
+        "api_key_length": len(key),
+    }
+
+
 @app.get("/newspaper")
 def get_newspaper():
     """מחזיר JSON של העיתון השמור."""
