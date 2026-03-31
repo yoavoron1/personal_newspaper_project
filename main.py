@@ -8,7 +8,7 @@ from typing import Dict, List, Optional, Tuple
 import requests as http_requests
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 
 from config import get_settings
 from services.ai_service import AIService
@@ -17,7 +17,7 @@ from services.news_service import deduplicate_articles, fetch_articles_for_keywo
 
 RAILWAY_URL = "https://web-production-85103.up.railway.app"
 
-print(f"DEBUG: API_KEY starts with: {os.getenv('API_KEY', '')[:3]}...")
+print(f"Sending request with API_KEY: {os.getenv('API_KEY', '')[:3]}...")
 
 CACHE_FILE = Path(__file__).resolve().parent / "newspaper_cache.json"
 
@@ -47,7 +47,7 @@ def push_to_railway(newspaper_data: Dict, selected_articles: List[Dict]) -> None
 
     payload = {"newspaper_data": newspaper_data, "selected_articles": selected_articles}
     headers = {"x-api-key": os.getenv("API_KEY", "")}
-    print(f"DEBUG: sending x-api-key starts with: {headers['x-api-key'][:3]}...")
+    print(f"Sending request with API_KEY: {headers['x-api-key'][:3]}...")
     try:
         response = http_requests.post(
             f"{RAILWAY_URL}/update-news",

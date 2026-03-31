@@ -6,13 +6,13 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
@@ -23,7 +23,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
-print(f"DEBUG: API_KEY starts with: {os.getenv('API_KEY', '')[:3]}...")
+print(f"Server received API_KEY starting with: {os.getenv('API_KEY', '')[:3]}...")
 
 app.add_middleware(
     CORSMiddleware,
@@ -70,11 +70,20 @@ def get_newspaper():
 
 
 @app.post("/update-news")
-async def update_news(request: Request, x_api_key: str = Header(None, alias="x-api-key")):
+async def update_news(request: Request):
     """מקבל נתוני עיתון חדשים מהסקריפט המקומי ושומר אותם."""
+    api_key_header = (
+        request.headers.get("x-api-key")
+        or request.headers.get("X-API-Key")
+        or request.headers.get("X-Api-Key")
+    )
     expected_key = os.getenv("API_KEY", "")
-    print(f"DEBUG /update-news: received key starts with: {(x_api_key or '')[:3]}... | expected starts with: {expected_key[:3]}...")
-    if not expected_key or x_api_key != expected_key:
+
+    received_preview = api_key_header[:3] if api_key_header else "NONE"
+    expected_preview = expected_key[:3] if expected_key else "NONE"
+    print(f"Server received API_KEY starting with: {received_preview}... | expected: {expected_preview}...")
+
+    if not expected_key or api_key_header != expected_key:
         raise HTTPException(status_code=401, detail="Unauthorized: invalid or missing API key")
 
     try:
@@ -85,7 +94,7 @@ async def update_news(request: Request, x_api_key: str = Header(None, alias="x-a
             json.dumps(body, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
-        print("\n[update-news] Cache updated successfully.")
+        print("[update-news] Cache updated successfully.")
         return JSONResponse({"status": "ok", "message": "Newspaper data updated"})
     except HTTPException:
         raise
