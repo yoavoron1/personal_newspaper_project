@@ -1,52 +1,61 @@
 {
   "newspaper_data": {
-    "title": "עיתון השבוע של רחל מינץ",
-    "intro": "שבוע נוסף מתמקד בנושאים שהכי מעניינים אותי: אומנות, טכנולוגיה, חלל ותרבות. יש פה כמה כתבות חדשות ומרתקות שאני בטוחה שתאהבו!",
+    "title": "עיתון שבועי אישי - רחל מינץ",
+    "intro": "ברוכים הבאים לגיליון השבועי שלי! כאן תמצאו כתבות קצרות על תחומי העניין שלי, עם אפשרות להתרחב לפי רצונכם.",
     "articles": [
       {
-        "title": "מוזיאון TeamLab Planets בטוקיו: לא מה שחשבתם",
-        "summary": "ביקור במוזיאון אימרסיבי בטוקיו שהפתיע אותי מאוד.",
-        "details": "במוזיאון TeamLab Planets, תהיו immersed בתשעה חללים שונים שמזמינים אתכם לחוות אמנות בשילוב טכנולוגיה. מדובר באחת האטרקציות הפופולריות בטוקיו, וממש שווה את הביקור.",
-        "personal_note": "אני מאוד אוהבת לחקור את החיבורים בין אמנות לטכנולוגיה, וזה מקום שהתאהבתי בו!"
+        "title": "מניעת פשעים ובניית סדרות: הכתבה על הסדרה החדש של Prime Video",
+        "summary": "העיבוד החדש של סדרת ספרים אייקונית יכול להימשך מעל ל-20 עונות.",
+        "details": "בעוד שעונותיה הראשונות של הסדרה שודרו, יש פוטנציאל להתרחבות משמעותית בתכנים שמהם תוכל החברה להרוויח. בשוק התקשורת הנוכחי, סדרה מצליחה יכולה להיות אבן שואבת לקהל.",
+        "personal_note": "אוהבת לראות סדרות באיכות גבוהה, זה יכול להיות חוויה מעשירה."
       },
       {
-        "title": "סטודיו Gubgub: פלטפורמת האומנים הראשונה של קטר",
-        "summary": "מקום חדש עבור יוצרים עצמאיים בעיר האמנותית ביותר.",
-        "details": "Gubgub Studios מציע מקום ליוצרים עצמאיים לשלב בין דיסציפלינות שונות. זהו מצע חדש לעסוק באומנות בצורה עצמאית בעיר שבה המוסדות שולטים.",
-        "personal_note": "העובדה שיש מקום כמו Gubgub נותנת לי תקווה לעתיד האומנות בעיר זו."
+        "title": "תביעה מעניינת: טיילור סוויפט והמותג של 'שואו-גירל'",
+        "summary": "זמרת מפורסמת נתבעת על ידי אמנית בווגאס.",
+        "details": "שואגת אמנות יתראש מתביעה על כך שהיא הפרה סימן מסחרי בנוגע למותג החדש שלה שקשור להופעות והופעות.",
+        "personal_note": "סקרן אותי לדעת מה ייצא מזה - המשפטים של ידוענים תמיד מציעים המון דרמה!"
       },
       {
-        "title": "עליית האוליגרכיה הדיגיטלית",
-        "summary": "איך הטכנולוגיה משנה את פני החברה.",
-        "details": "ה- AI גורם לחברה לעבור תקופה מסובכת מאוד. השאלות המרכזיות הן האם נישאר מחזיקים בידנו את הסיפור שלנו或?",
-        "personal_note": "כחובבת טכנולוגיה, אני מאוד מתעניינת בהשפעות של שינויי הטכנולוגיה על החברה."
+        "title": "מוזיאון טוקיו שכבש את ליבי: TeamLab Planets",
+        "summary": "המוזיאון המרגש בטוקיו הפך לאטרקציה מובילה.",
+        "details": "נכנסתי למוזיאון הדיגיטלי, ונדהמתי מהתחושה המוחשית שהמיצגים מעניקים. הוא הראה לי את המהות של האמנות והחדשנות.",
+        "personal_note": "תמיד רציתי לבקר ביפן. עכשיו אני בטוחה שהמוזיאון הזה יהיה על liste de mes priorités."
       },
       {
-        "title": "תוצאות Sidetrade לשנת 2025: שיאים ואפשרויות חדשות",
-        "summary": "עבור המעניין אתכם בעולם העסקי.",
-        "details": "תוצאות 2025 הצביעו על צמיחה מרשימה, עם עלייה של 14% בהכנסות ורווחיות שיא.",
-        "personal_note": "אני לא כל כך בתחום הזה, אבל זה מרגש לראות צמיחה כלכלית כזו בעידן של טכנולוגיות חדשות."
+        "title": "הופעת האוליגרכיה הדיגיטלית: מה צופן העתיד?",
+        "summary": "העידן הטכנולוגי וההשפעות המרתקות של אינטליגנציה מלאכותית.",
+        "details": "הבינה המלאכותית היא לא רק כלי, אלא יכולה לשפוט את הכיוונים שבהם חברתנו נודדת. האם נמשיך להיות הסופרים של הסיפור שלנו או שניתן למערכות לכתוב את הדף הבא?",
+        "personal_note": "נושא מרתק שמעסיק אותי, במיוחד כמישהי שמעורבת בחינוך וטכנולוגיה."
       }
     ]
   },
   "selected_articles": [
     {
-      "keyword": "global art exhibitions",
+      "keyword": "bestselling new books",
+      "title": "How Prime Video’s Hit Thriller Series Could Run For More Than 20 Seasons (And Fix a Major Movie Problem)",
+      "description": "While only two seasons of Prime Video’s hit thriller show have aired so far, this adaptation of an iconic author’s novel series could potentially last for decades. A great procedural can be a veritable goldmine for a TV network or streaming service. Since bes…",
+      "url": "http://comicbook.com/tv-shows/feature/how-prime-videos-hit-thriller-series-could-run-for-more-than-20-seasons-and-fix-a-major-movie-problem/",
+      "source": "ComicBook.com",
+      "published_at": "2026-03-30T18:30:00Z",
+      "image": "https://comicbook.com/wp-content/uploads/sites/4/2026/03/Matthew-Lillard-in-Cross-season-2.jpg?resize=2000,1125"
+    },
+    {
+      "keyword": "global art news",
+      "title": "Taylor Swift sued by Las Vegas showgirl for trademark infringement",
+      "description": "A Las Vegas performer is suing Taylor Swift for trademark infringement over her latest album’s “showgirl” branding",
+      "url": "https://www.nbcnews.com/pop-culture/pop-culture-news/taylor-swift-sued-las-vegas-showgirl-trademark-infringement-rcna265902",
+      "source": "NBC News",
+      "published_at": "2026-03-30T21:25:48Z",
+      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2025-10/251006-taylor-swift-life-of-a-showgirl-ew-557p-cab74b.jpg"
+    },
+    {
+      "keyword": "new exhibitions",
       "title": "I thought this Tokyo museum would be a major tourist trap. It ended up being a highlight of my first trip to Japan.",
       "description": "TeamLab Planets, a huge immersive art museum, has become one of the most popular attractions in Tokyo, Japan. It's worth a visit.",
       "url": "https://www.businessinsider.com/teamlab-planets-museum-tokyo-japan-review",
       "source": "Business Insider",
       "published_at": "2026-03-30T21:12:21Z",
       "image": "https://i.insider.com/68471e70f748d8c055f3515c?width=1200&format=jpeg"
-    },
-    {
-      "keyword": "global art exhibitions",
-      "title": "Inside Gubgub Studios, Qatar’s First Artist-Led Platform for Cross-Disciplinary Creatives",
-      "description": "In one of the world's most institution-heavy art scenes, Gubgub Studios is making the case for independence.",
-      "url": "https://observer.com/2026/03/interview-gubgub-studios-qatar-sebastian-betancur-montoya-artists/",
-      "source": "Observer",
-      "published_at": "2026-03-30T19:49:40Z",
-      "image": "https://observer.com/wp-content/uploads/sites/2/2026/03/DSC00762.jpg?quality=80"
     },
     {
       "keyword": "astronomy discoveries",
@@ -56,15 +65,6 @@
       "source": "Rolling Stone",
       "published_at": "2026-03-29T13:00:00Z",
       "image": "https://www.rollingstone.com/wp-content/uploads/2026/03/The-Digital-Interregnum_Final.jpg?crop=0px%2C830px%2C1800px%2C1012px&resize=1600%2C900"
-    },
-    {
-      "keyword": "AI technological advancements",
-      "title": "Sidetrade posts record margins in 2025 and American investors reached 31% of Sidetrade’s free float",
-      "description": "2025 Annual Results  Strong Revenue Growth in 2025: up 14% with Subscriptions up 20%   Record Profitability: EBITDA up 22% to €13.4 million, Representing...",
-      "url": "https://www.globenewswire.com/news-release/2026/03/30/3264790/0/en/Sidetrade-posts-record-margins-in-2025-and-American-investors-reached-31-of-Sidetrade-s-free-float.html",
-      "source": "GlobeNewswire",
-      "published_at": "2026-03-30T15:38:00Z",
-      "image": "https://ml-eu.globenewswire.com/Resource/Download/592b617a-cc7a-42ab-bca7-e830e8639758"
     }
   ]
 }
