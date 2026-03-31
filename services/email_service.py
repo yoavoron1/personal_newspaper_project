@@ -53,13 +53,30 @@ def build_email_html(newspaper_data: Dict, selected_articles: List[Dict]) -> str
             """
         )
 
+    railway_url = "https://web-production-85103.up.railway.app"
+
+    view_button = f"""
+    <div style="text-align:center;margin:32px 0;">
+      <a href="{railway_url}" target="_blank"
+         style="display:inline-block;background-color:#1e3a5f;color:#ffffff;
+                font-size:20px;font-weight:bold;text-decoration:none;
+                padding:18px 40px;border-radius:50px;
+                font-family:Arial,Helvetica,sans-serif;letter-spacing:0.5px;
+                box-shadow:0 4px 12px rgba(30,58,95,0.35);">
+        📰 לצפייה בעיתון המלא
+      </a>
+    </div>
+    """
+
     return f"""
     <html dir="rtl" lang="he">
       <head><meta charset="utf-8"></head>
       <body style="font-family:Arial,Helvetica,sans-serif;max-width:900px;margin:0 auto;">
         <h1>{title}</h1>
         <p>{intro}</p>
+        {view_button}
         {''.join(articles_html)}
+        {view_button}
       </body>
     </html>
     """

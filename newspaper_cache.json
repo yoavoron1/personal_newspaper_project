@@ -1,0 +1,70 @@
+{
+  "newspaper_data": {
+    "title": "עיתון שבועי אישי - רחל מינץ",
+    "intro": "ברוכים הבאים לעיתון האישי שלי! כאן תמצאו את המאמרים והחדשות שמסקרנות אותי השבוע.",
+    "articles": [
+      {
+        "title": "עשור של טריילרים: הסדרה המותחת של Prime Video",
+        "summary": "אם אתם אוהבים סדרות מתח, יש לנו חדשות מצוינות! הסדרה הפופולרית של Prime Video עשויה להימשך יותר מ-20 עונות.",
+        "details": "על פי מקורות, הסדרה, שמבוססת על סדרת רומנים של סופר מפורסם, הצליחה ליצור בעונותיה הראשונות בסיס חזק של צופים. במיוחד, מדובר בסדרה שיכולה להוות מכרה זהב לרשתות הטלוויזיה והזרמת תכנים.",
+        "personal_note": "הסדרה נשמעת מרתקת ואני מתכננת להתחיל לצפות בה. תמיד אהבתי ציפייה לעונה חדשה בסדרות טובות!"
+      },
+      {
+        "title": "עזיבתו של גיום צרוטי: עידן חדש בעולם האמנות?",
+        "summary": "גיום צרוטי, המנכ״ל לשעבר של בית מכירות כריסטי, עזב את תפקידו כנשיא אוסף פינה.",
+        "details": "צרוטי, שמינה בתפקידו בשנה שעברה, עוזב לאחר מסלול קצר אך מרשים. רבים תוהים מה יקרה לאוסף הפינה לאחר עזיבתו ומה יעלה בגורל האמנות המודרנית.",
+        "personal_note": "אני אוהבת לעקוב אחרי התפתחויות בתחום האמנות. אני מקווה שהשינויים לא ישפיעו לרעה על האוסף."
+      },
+      {
+        "title": "עליית האוליגרכיה הדיגיטלית: מה זה אומר עבורנו?",
+        "summary": "מודל האי הולך ותופס תאוצה, אך מה ההשלכות החברתיות של כך?",
+        "details": "במאמר זה נדונה השפעתה של הטכנולוגיה המודרנית והשפעות האי על החברה. מה יקרה אם נחדש את נרטיב האנושות?",
+        "personal_note": "מעניין אותי איך ההתקדמות הדיגיטלית תוכל להשפיע על חיינו בעתיד. זה דורש חשיבה מעמיקה."
+      },
+      {
+        "title": "לונג'ביטי: מה חדש בתחום הבריאות להארכת חיים?",
+        "summary": "בדיקה של טבליות BPC-157 ואודות השפעותיהן על אריכות חיים.",
+        "details": "בשנת 2026 יוצא מדריך 소비רים שיבחן את הפרטים לגבי טבליות BPC-157 והשפעותיהן על בריאות הגוף, כולל מחקרים קליניים וסטנדרטים רגולטוריים.",
+        "personal_note": "באופן אישי, אני תמיד מחפשת דרכים לשמור על הבריאות ולחיות חיים ארוכים וטובים יותר."
+      }
+    ]
+  },
+  "selected_articles": [
+    {
+      "keyword": "new bestselling books",
+      "title": "How Prime Video’s Hit Thriller Series Could Run For More Than 20 Seasons (And Fix a Major Movie Problem)",
+      "description": "While only two seasons of Prime Video’s hit thriller show have aired so far, this adaptation of an iconic author’s novel series could potentially last for decades. A great procedural can be a veritable goldmine for a TV network or streaming service. Since bes…",
+      "url": "http://comicbook.com/tv-shows/feature/how-prime-videos-hit-thriller-series-could-run-for-more-than-20-seasons-and-fix-a-major-movie-problem/",
+      "source": "ComicBook.com",
+      "published_at": "2026-03-30T18:30:00Z",
+      "image": "https://comicbook.com/wp-content/uploads/sites/4/2026/03/Matthew-Lillard-in-Cross-season-2.jpg?resize=2000,1125"
+    },
+    {
+      "keyword": "art news exhibitions",
+      "title": "Guillaume Cerutti, Former Christie’s CEO, Leaves Post as Pinault Collection President",
+      "description": "Guillaume Cerutti, the former CEO of Christie's auction house, has left his position at the Pinault Collection after just 13 months.",
+      "url": "https://www.artnews.com/art-news/market/guillaume-cerutti-pinault-collection-president-out-1234779208/",
+      "source": "ARTnews",
+      "published_at": "2026-03-27T19:11:43Z",
+      "image": ""
+    },
+    {
+      "keyword": "astronomy discoveries",
+      "title": "The Rise of the Digital Oligarchy",
+      "description": "AI has pushed society into a period of tumult and confusion. What comes next will determine if humanity remains the author of its own story, or if it is quietly written out",
+      "url": "http://www.rollingstone.com/politics/political-commentary/rise-digital-oligarchy-ai-era-1235534437/",
+      "source": "Rolling Stone",
+      "published_at": "2026-03-29T13:00:00Z",
+      "image": "https://www.rollingstone.com/wp-content/uploads/2026/03/The-Digital-Interregnum_Final.jpg?crop=0px%2C830px%2C1800px%2C1012px&resize=1600%2C900"
+    },
+    {
+      "keyword": "longevity research",
+      "title": "ProHealth Longevity BPC‑157 Claims Evaluated: Most Effective BPC157 Peptide Brand on the Market (2026)",
+      "description": "A 2026 consumer information guide examining ProHealth BPC-157 oral peptide capsule details, arginate vs acetate formulation context, preclinical tissue repair research, regulatory status, third-party testing transparency, and what men and women should verify …",
+      "url": "https://www.globenewswire.com/news-release/2026/03/30/3265047/0/en/ProHealth-Longevity-BPC-157-Claims-Evaluated-Most-Effective-BPC157-Peptide-Brand-on-the-Market-2026.html",
+      "source": "GlobeNewswire",
+      "published_at": "2026-03-30T20:36:00Z",
+      "image": "https://ml.globenewswire.com/Resource/Download/6bcbfe0d-2035-47a4-886e-8c75953227b5"
+    }
+  ]
+}

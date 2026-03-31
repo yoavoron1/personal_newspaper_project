@@ -1,11 +1,59 @@
 """קובץ אורקסטרציה ראשי ליצירת עיתון אישי ושליחת מייל."""
 
+import json
+import os
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+import requests as http_requests
 
 from config import get_settings
 from services.ai_service import AIService
 from services.email_service import build_email_html, send_email
 from services.news_service import deduplicate_articles, fetch_articles_for_keyword
+
+RAILWAY_URL = "https://web-production-85103.up.railway.app"
+
+CACHE_FILE = Path(__file__).resolve().parent / "newspaper_cache.json"
+
+
+def save_newspaper_cache(newspaper_data: Dict, selected_articles: List[Dict]) -> None:
+    """שומר את נתוני העיתון לקובץ cache לשימוש האתר."""
+    try:
+        CACHE_FILE.write_text(
+            json.dumps(
+                {"newspaper_data": newspaper_data, "selected_articles": selected_articles},
+                ensure_ascii=False,
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        print(f"\nNewspaper data cached to {CACHE_FILE}")
+    except Exception as exc:
+        print(f"\n[WARNING] Could not save cache: {exc}")
+
+
+def push_to_railway(newspaper_data: Dict, selected_articles: List[Dict]) -> None:
+    """שולח את נתוני העיתון לשרת Railway כדי לעדכן את האתר."""
+    api_key = os.getenv("UPDATE_API_KEY", "")
+    if not api_key:
+        print("\n[WARNING] UPDATE_API_KEY not set — skipping Railway push.")
+        return
+
+    payload = {"newspaper_data": newspaper_data, "selected_articles": selected_articles}
+    try:
+        response = http_requests.post(
+            f"{RAILWAY_URL}/update-news",
+            json=payload,
+            headers={"x-api-key": api_key},
+            timeout=30,
+        )
+        if response.status_code == 200:
+            print(f"\nRailway site updated successfully! ({RAILWAY_URL})")
+        else:
+            print(f"\n[WARNING] Railway push returned {response.status_code}: {response.text}")
+    except Exception as exc:
+        print(f"\n[WARNING] Could not push to Railway: {exc}")
 
 
 USER_NAME = "רחל מינץ"
@@ -97,6 +145,9 @@ def main() -> Optional[Dict]:
         return None
 
     newspaper_data, selected_articles = result
+    save_newspaper_cache(newspaper_data, selected_articles)
+    push_to_railway(newspaper_data, selected_articles)
+
     email_html_content = build_email_html(newspaper_data, selected_articles)
 
     sent = send_email(

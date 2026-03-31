@@ -21,13 +21,32 @@
         <div class="mx-auto mb-6 h-1 w-24 rounded-full bg-blue-900/80"></div>
         <p class="mb-2 text-xs tracking-[0.35em] text-blue-900/90 md:text-sm">PERSONAL WEEKLY EDITION</p>
         <h1 class="text-5xl font-extrabold leading-tight text-blue-900 md:text-7xl">{{ title }}</h1>
+        {% if intro %}
         <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">{{ intro }}</p>
+        {% endif %}
         <div class="mx-auto mt-6 flex w-28 items-center justify-center gap-2 text-blue-900">
           <span class="h-px w-10 bg-blue-900/30"></span>
           <span class="h-2 w-2 rounded-full bg-blue-900"></span>
           <span class="h-px w-10 bg-blue-900/30"></span>
         </div>
       </section>
+
+      {% if coming_soon %}
+      <section class="mt-16 flex flex-col items-center justify-center text-center">
+        <div class="rounded-3xl border border-blue-100 bg-white px-10 py-14 shadow-sm">
+          <div class="mb-4 text-6xl">📰</div>
+          <h2 class="text-3xl font-extrabold text-blue-900">העיתון הבא בדרך...</h2>
+          <p class="mx-auto mt-4 max-w-md text-lg text-slate-500">
+            העיתון האישי שלך יופיע כאן בקרוב. הוא נוצר עבורך במיוחד ויישלח גם למייל.
+          </p>
+          <div class="mt-8 flex items-center justify-center gap-3">
+            <span class="inline-block h-3 w-3 animate-bounce rounded-full bg-blue-900" style="animation-delay:0ms"></span>
+            <span class="inline-block h-3 w-3 animate-bounce rounded-full bg-blue-900" style="animation-delay:150ms"></span>
+            <span class="inline-block h-3 w-3 animate-bounce rounded-full bg-blue-900" style="animation-delay:300ms"></span>
+          </div>
+        </div>
+      </section>
+      {% endif %}
 
       {% if articles and articles|length > 0 %}
       {% set main_article = articles[0] %}

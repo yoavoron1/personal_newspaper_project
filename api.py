@@ -1,19 +1,20 @@
 """FastAPI endpoints עבור יצירת עיתון אישי."""
 
+import json
+import os
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 
-from fastapi import FastAPI
-from fastapi import Request
+from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
-from main import create_newspaper_data
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
 TEMPLATES_DIR = BASE_DIR / "templates"
+CACHE_FILE = BASE_DIR / "newspaper_cache.json"
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
@@ -28,50 +29,85 @@ app.add_middleware(
 )
 
 
+def load_cached_newspaper() -> Optional[Tuple[Dict, List[Dict]]]:
+    """טוען את נתוני העיתון האחרון מהקובץ השמור."""
+    if not CACHE_FILE.exists():
+        return None
+    try:
+        data = json.loads(CACHE_FILE.read_text(encoding="utf-8"))
+        return data["newspaper_data"], data["selected_articles"]
+    except Exception:
+        return None
+
+
+def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List[Dict]:
+    """מוסיף URL ותמונה מהמאמרים המקוריים."""
+    enriched = []
+    for idx, article in enumerate(newspaper_data.get("articles", [])):
+        source = selected_articles[idx] if idx < len(selected_articles) else {}
+        item = dict(article)
+        item["url"] = source.get("url", "")
+        item["image"] = source.get("image", "")
+        if "commentary" not in item:
+            item["commentary"] = item.get("personal_note", "")
+        enriched.append(item)
+    return enriched
+
+
 @app.get("/newspaper")
 def get_newspaper():
-    """מחזיר JSON של עיתון אישי שנוצר דינמית."""
-    try:
-        result = create_newspaper_data()
-    except Exception as exc:
-        return {"error": f"Server failed to generate newspaper: {exc}"}
-
+    """מחזיר JSON של העיתון השמור."""
+    result = load_cached_newspaper()
     if not result:
-        return {"error": "Could not generate newspaper data"}
-
+        return {"error": "No newspaper data yet. Run main.py to generate."}
     newspaper_data, _ = result
     return newspaper_data
 
 
+@app.post("/update-news")
+async def update_news(request: Request, x_api_key: str = Header(None)):
+    """מקבל נתוני עיתון חדשים מהסקריפט המקומי ושומר אותם."""
+    expected_key = os.getenv("UPDATE_API_KEY", "")
+    if not expected_key or x_api_key != expected_key:
+        raise HTTPException(status_code=401, detail="Unauthorized: invalid or missing API key")
+
+    try:
+        body = await request.json()
+        if "newspaper_data" not in body or "selected_articles" not in body:
+            raise HTTPException(status_code=422, detail="Missing newspaper_data or selected_articles")
+        CACHE_FILE.write_text(
+            json.dumps(body, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        print("\n[update-news] Cache updated successfully.")
+        return JSONResponse({"status": "ok", "message": "Newspaper data updated"})
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"Failed to save data: {exc}")
+
+
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
-    """מציג עיתון אישי בעיצוב HTML/Tailwind עם Jinja2."""
-    try:
-        result = create_newspaper_data()
-    except Exception as exc:
-        return HTMLResponse(f"<h1>Server Error</h1><p>{exc}</p>", status_code=500)
+    """מציג את העיתון האחרון שנוצר, או הודעת המתנה ידידותית."""
+    result = load_cached_newspaper()
 
     if not result:
-        return HTMLResponse("<h1>No data available</h1>", status_code=500)
+        context = {
+            "request": request,
+            "title": "העיתון האישי שלך",
+            "intro": "",
+            "articles": [],
+            "coming_soon": True,
+        }
+        return templates.TemplateResponse("index.html", context)
 
     newspaper_data, selected_articles = result
-    articles = newspaper_data.get("articles", [])
-
-    # שילוב URL/תמונה מהכתבות המקוריות + תאימות לשדה commentary בתבנית.
-    enriched_articles = []
-    for idx, article in enumerate(articles):
-        source_article = selected_articles[idx] if idx < len(selected_articles) else {}
-        enriched = dict(article)
-        enriched["url"] = source_article.get("url", "")
-        enriched["image"] = source_article.get("image", "")
-        if "commentary" not in enriched:
-            enriched["commentary"] = enriched.get("personal_note", "")
-        enriched_articles.append(enriched)
-
     context = {
         "request": request,
         "title": newspaper_data.get("title", "The Weekly Chronicle"),
         "intro": newspaper_data.get("intro", ""),
-        "articles": enriched_articles,
+        "articles": enrich_articles(newspaper_data, selected_articles),
+        "coming_soon": False,
     }
     return templates.TemplateResponse("index.html", context)
