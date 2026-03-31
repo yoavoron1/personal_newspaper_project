@@ -15,7 +15,7 @@ from services.ai_service import AIService
 from services.email_service import build_email_html, send_email
 from services.news_service import deduplicate_articles, fetch_articles_for_keyword
 
-RAILWAY_URL = "https://web-production-85103.up.railway.app"
+RAILWAY_URL = "https://personalnewspaperproject-production.up.railway.app"
 
 print(f"Sending request with API_KEY: {os.getenv('API_KEY', '')[:3]}...")
 
