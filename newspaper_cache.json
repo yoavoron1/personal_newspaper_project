@@ -1,52 +1,52 @@
 {
   "newspaper_data": {
-    "title": "עיתון שבועי אישי של רחל מינץ",
-    "intro": "ברוכים הבאים לעיתון השבועי שלי! כאן תוכלו למצוא את הכתבות הכי מעניינות מעולם הספרים, האומנות, האסטרונומיה והטכנולוגיה, עם קצת מידע על טרנדים באופנה ובקולנוע. אני מקווה שתהנו!",
+    "title": "עיתון השבוע של רחל מינץ",
+    "intro": "שבוע נוסף מתמקד בנושאים שהכי מעניינים אותי: אומנות, טכנולוגיה, חלל ותרבות. יש פה כמה כתבות חדשות ומרתקות שאני בטוחה שתאהבו!",
     "articles": [
       {
-        "title": "ביקורת על מכירות האומנות בהונג קונג",
-        "summary": "תערוכות חדשות בהונג קונג מצביעות על בשלות בשוק האומנות.",
-        "details": "במהלך חודש מרץ, התערוכות בהונג קונג חשפו שוק אומנות מוגבר הפועל על פי ערכים מתמשכים ולא רק על בסיס ספקולציות רגעיות. התוצאות מצביעות על כך שהאומנם שאוהבים את האומנות מחפשים כבר עכשיו בניית ערכים ותורשה ולא רק הסתערות על רווחים מיידיים.",
-        "personal_note": "מעניין לראות כיצד האומנות מצליחה לשמור על ערכים גם בשוק השוקע והמשתנה."
+        "title": "מוזיאון TeamLab Planets בטוקיו: לא מה שחשבתם",
+        "summary": "ביקור במוזיאון אימרסיבי בטוקיו שהפתיע אותי מאוד.",
+        "details": "במוזיאון TeamLab Planets, תהיו immersed בתשעה חללים שונים שמזמינים אתכם לחוות אמנות בשילוב טכנולוגיה. מדובר באחת האטרקציות הפופולריות בטוקיו, וממש שווה את הביקור.",
+        "personal_note": "אני מאוד אוהבת לחקור את החיבורים בין אמנות לטכנולוגיה, וזה מקום שהתאהבתי בו!"
       },
       {
-        "title": "גאלה 2026: לקחת מקום",
-        "summary": "הגאלה באוניברסיטת הארוורד עם מיטב הכישרונות.",
-        "details": "באירוע שהתקיים באוניברסיטת הארוורד, הוצגו כישרונות כמו לולה טונג, אילין גו, ואוליביה מון. האירוע נמשך כל היום והוקדש לקידום רעיונות שלוקחים מקום במרחב הציבורי.",
-        "personal_note": "נראה שהדור הצעיר באמת יודע לקחת את המקום שלו. מחכה לראות לאן זה יוביל."
+        "title": "סטודיו Gubgub: פלטפורמת האומנים הראשונה של קטר",
+        "summary": "מקום חדש עבור יוצרים עצמאיים בעיר האמנותית ביותר.",
+        "details": "Gubgub Studios מציע מקום ליוצרים עצמאיים לשלב בין דיסציפלינות שונות. זהו מצע חדש לעסוק באומנות בצורה עצמאית בעיר שבה המוסדות שולטים.",
+        "personal_note": "העובדה שיש מקום כמו Gubgub נותנת לי תקווה לעתיד האומנות בעיר זו."
       },
       {
-        "title": "העלייה של האוליגרכיה הדיגיטלית",
-        "summary": "השפעת ה-AI על החברה ועל הסיפור האנושי.",
-        "details": "ה-AI דוחף אותנו לעידן של בלבול וכל העולם מושפע מזה. מה שיקרה בהמשך יעמיד את האנושות במבחן, האם נמשיך לכתוב את הסיפור שלנו או שנשאר עתיד ללא שליטה.",
-        "personal_note": "ההתקדמות הזאת בוודאי תשפיע על הדורות הבאים. החשיבה על הכיוונים שייקחו אותנו מאוד מעניינת."
+        "title": "עליית האוליגרכיה הדיגיטלית",
+        "summary": "איך הטכנולוגיה משנה את פני החברה.",
+        "details": "ה- AI גורם לחברה לעבור תקופה מסובכת מאוד. השאלות המרכזיות הן האם נישאר מחזיקים בידנו את הסיפור שלנו或?",
+        "personal_note": "כחובבת טכנולוגיה, אני מאוד מתעניינת בהשפעות של שינויי הטכנולוגיה על החברה."
       },
       {
-        "title": "האמון בכלים הדיגיטליים הולך ונופל",
-        "summary": "ללמרות עליית ה-AI, האמריקאים מהססים לגבי אמינות התוצאות.",
-        "details": "על פי סקר חדש, אין אמון גבוה בשימוש בכלים דיגיטליים במדינת ארה\"ב. האמריקאים מודאגים מהשקיפות של הטכנולוגיה, מהרגולציה שלה ומשפעתה החברתית הרחבה.",
-        "personal_note": "חשוב לנו להיות זהירים עם הכלים החדשים האלו. יש צורך לוודא שהשקיפות נשמרת."
+        "title": "תוצאות Sidetrade לשנת 2025: שיאים ואפשרויות חדשות",
+        "summary": "עבור המעניין אתכם בעולם העסקי.",
+        "details": "תוצאות 2025 הצביעו על צמיחה מרשימה, עם עלייה של 14% בהכנסות ורווחיות שיא.",
+        "personal_note": "אני לא כל כך בתחום הזה, אבל זה מרגש לראות צמיחה כלכלית כזו בעידן של טכנולוגיות חדשות."
       }
     ]
   },
   "selected_articles": [
     {
-      "keyword": "latest exhibitions",
-      "title": "Across the Major Houses, Hong Kong’s March Sales Confirm a New Collecting Maturity",
-      "description": "Taken together, the results paint a vivid portrait of a market that is coming of age without losing its appetite and building lasting value and legacy rather than chasing speculative heat.",
-      "url": "https://observer.com/2026/03/report-hong-kong-art-week-auction-results-2026-christies-sothebys-phillips/",
-      "source": "Observer",
-      "published_at": "2026-03-30T16:57:25Z",
-      "image": "https://observer.com/wp-content/uploads/sites/2/2026/03/HGK_2021C-Evening-Sale-03.27.26-1004_L3.jpg?quality=80"
+      "keyword": "global art exhibitions",
+      "title": "I thought this Tokyo museum would be a major tourist trap. It ended up being a highlight of my first trip to Japan.",
+      "description": "TeamLab Planets, a huge immersive art museum, has become one of the most popular attractions in Tokyo, Japan. It's worth a visit.",
+      "url": "https://www.businessinsider.com/teamlab-planets-museum-tokyo-japan-review",
+      "source": "Business Insider",
+      "published_at": "2026-03-30T21:12:21Z",
+      "image": "https://i.insider.com/68471e70f748d8c055f3515c?width=1200&format=jpeg"
     },
     {
-      "keyword": "emerging artists",
-      "title": "The 2026 Shiftmakers Gala Was All About Taking Up Space, and Lola Tung, Eileen Gu, and Olivia Munn Delivered",
-      "description": "The Shift hosted a day of programming at Harvard University, culminating in the Shiftmakers Gala featuring Lola Tung, Eileen Gu, and Olivia Munn.",
-      "url": "https://www.cosmopolitan.com/entertainment/celebs/a70870745/harvard-shiftmakers-gala-2026-lola-tung-eileen-gu-olivia-munn-recap/",
-      "source": "Cosmopolitan.com",
-      "published_at": "2026-03-30T21:14:03Z",
-      "image": "https://hips.hearstapps.com/hmg-prod/images/3338ddcc-0744-485f-b96e-44270c11a7e0.png?crop=1xw:0.631xh;0xw,0.139xh&resize=1200:*"
+      "keyword": "global art exhibitions",
+      "title": "Inside Gubgub Studios, Qatar’s First Artist-Led Platform for Cross-Disciplinary Creatives",
+      "description": "In one of the world's most institution-heavy art scenes, Gubgub Studios is making the case for independence.",
+      "url": "https://observer.com/2026/03/interview-gubgub-studios-qatar-sebastian-betancur-montoya-artists/",
+      "source": "Observer",
+      "published_at": "2026-03-30T19:49:40Z",
+      "image": "https://observer.com/wp-content/uploads/sites/2/2026/03/DSC00762.jpg?quality=80"
     },
     {
       "keyword": "astronomy discoveries",
@@ -58,13 +58,13 @@
       "image": "https://www.rollingstone.com/wp-content/uploads/2026/03/The-Digital-Interregnum_Final.jpg?crop=0px%2C830px%2C1800px%2C1012px&resize=1600%2C900"
     },
     {
-      "keyword": "AI technology advancements",
-      "title": "As more Americans adopt AI tools, fewer say they can trust the results | TechCrunch",
-      "description": "AI adoption is rising in the U.S., but trust remains low, with most Americans concerned about transparency, regulation, and the technology’s broader societal impact, according to a new Quinnipiac poll.",
-      "url": "https://techcrunch.com/2026/03/30/ai-trust-adoption-poll-more-americans-adopt-tools-fewer-say-they-can-trust-the-results/",
-      "source": "TechCrunch",
-      "published_at": "2026-03-30T20:25:48Z",
-      "image": "https://techcrunch.com/wp-content/uploads/2026/03/claude-app-centered-in-ai-apps-GettyImages-2167861906.jpg?resize=1200,801"
+      "keyword": "AI technological advancements",
+      "title": "Sidetrade posts record margins in 2025 and American investors reached 31% of Sidetrade’s free float",
+      "description": "2025 Annual Results  Strong Revenue Growth in 2025: up 14% with Subscriptions up 20%   Record Profitability: EBITDA up 22% to €13.4 million, Representing...",
+      "url": "https://www.globenewswire.com/news-release/2026/03/30/3264790/0/en/Sidetrade-posts-record-margins-in-2025-and-American-investors-reached-31-of-Sidetrade-s-free-float.html",
+      "source": "GlobeNewswire",
+      "published_at": "2026-03-30T15:38:00Z",
+      "image": "https://ml-eu.globenewswire.com/Resource/Download/592b617a-cc7a-42ab-bca7-e830e8639758"
     }
   ]
 }
