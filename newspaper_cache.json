@@ -1,37 +1,37 @@
 {
   "newspaper_data": {
-    "title": "עיתון שבועי של רחל מינץ",
-    "intro": "ברוכים הבאים לעיתון האישי שלי, בו אשתף אתכם בחדשות ועדכונים מעניינים מהעולם של אהבותי ותשוקותיי.",
+    "title": "שבועון רחל מינץ",
+    "intro": "ברוכים הבאים לשבועון האישי של רחל מינץ, המקום שבו אני חולקת איתכם את המאמרים והעדכונים הכי מעניינים בשבוע החולף.",
     "articles": [
       {
-        "title": "איך סדרת המתח של פריים ווידאו עשויה להימשך יותר מ-20 עונות",
-        "summary": "למרות שרק שתי עונות שודרו עד כה, סדרת המתח הזו עשויה להימשך לעד עשרות שנים.",
-        "details": "הסדרה מבוססת על סדרת רומנים קלאסית, והופכת בהדרגה להצלחה מסחררת. היכולת של סדרת מתח להחזיק במשך שנים רבות טמונה בהזדמנויות שהעלילה מספקת לפיתוח דמויות וסיפורים חדשים. יש המון מקום לחדשנות ולהתרחשויות מרגשות, שהופכות אותה לאטרקטיבית לצופים.",
-        "personal_note": "כעובדת בתחום החינוך, אני רואה את הפוטנציאל החינוכי של תוכניות טלוויזיה בצורה כזו, וגם אני מתרגשת מהמגוון הרחב של דמויות וסיפורים שמעניין אותי לגלות."
+        "title": "איך סדרת המתח של Prime Video עשויה להימשך יותר מ-20 עונות (ולפתור בעיית קולנוע מרכזית)",
+        "summary": "סדרת טלוויזיה מצליחה זו, המבוססת על ספרים קלאסיים, עשויה להימשך במשך עשרות שנים ולהציע חוויות צפייה ממושכות.",
+        "details": "למרות שצולמו עד כה רק שתי עונות, פוטנציאל העלילה והדמויות בסדרה עשוי להציע תכנים חדשים שימשכו קהלים לכל אורך השנים. סדרות מצליחות כאלה, כמו CSI בעבר, יכולות להפוך לזהב טלוויזיוני.",
+        "personal_note": "אני תמיד נהניתה מצפייה בסדרות ממש מעניין לדעת אם הסדרה הזו תצליח לשמור על רעננותה. אשמח לדעת את דעתכם."
       },
       {
-        "title": "טלור סוויפט נתבעת על ידי מופיעה מהלאס וגאס על הפרת סימן מסחר",
-        "summary": "מופיעה מהלאס וגאס תובעת את טלור סוויפט על הפרת סימן מסחר בהקשר לאלבום החדש שלה.",
-        "details": "המופיעה טוענת ששימוש במונח 'שואו גירל' באלבום החדש של סוויפט פוגע בזכויותיה על המושג. המקרה הזה מעיד על הקשרים המורכבים בין תרבות הפופ למציאות המשפטית ומרמז על התקדמות התעשייה המוזיקלית.",
-        "personal_note": "כדי לדעת עוד על הקשרים החברתיים והרוחניים של המוזיקה שאני אוהבת, אני מתכוונת לעקוב אחרי המקרה הזה וללמוד על המגבלות המשפטיות בתעשיית המוזיקה."
+        "title": "גילומה של אומנות: גיומא סרוטי עוזב את תפקידו כנשיא אוסף פינולט",
+        "summary": "נשיא אוסף פינולט, גיומא סרוטי, עוזב את תפקידו לאחר 13 חודשים בלבד.",
+        "details": "סרוטי, שהיה בעבר מנכ\"ל בית המכירות כריסטי, הביא שינויים רבים לשדה האומנות, אך ההחלטה שלו לעזוב מעוררת שאלות רבות על הכיוונים הבאים של האוסף המיוחד הזה.",
+        "personal_note": "כחובבת אומנות, אני תמיד מתעניינת בשינויים כאלו. מעניין לדעת אילו מטרות חדשות יסומן אוסף פינולט לאחר עזיבתו."
       },
       {
         "title": "עליית האוליגרכיה הדיגיטלית",
-        "summary": "ה-AI הכניס את החברה לתקופה של מהומה ואי-בהירות.",
-        "details": "בעוד AI ממשיך להתפתח, נשאלת השאלה האם האנושות תמשיך להיות הסופר של סיפורנו או אם היא תימחק ההיסטוריה שלה. זהו נושא שחשוב לעסוק בו כדי להבין את השפעות הטכנולוגיה על חיינו.",
-        "personal_note": "כעוסקת מדעי החיים והחינוך, זהו נושא שמעורר בי המון מחשבות. אני מאמינה שעלינו לקחת חלק פעיל במוainkan עתידנו."
+        "summary": "ה-AI שינה והוביל אותנו לעידן של בלבול. מה יקרה לאחר מכן? האם נמשיך להיות הכותבים של הסיפור שלנו?",
+        "details": "הקדמה המהירה של טכנולוגיות בינה מלאכותית עשויה להביא לשינויים מרחיקי לכת בכל תחום, מחינוך ועד לפרסום. האם צריך לחשוש מהעתיד או לembrace את השינויים?",
+        "personal_note": "אני מתעניינת בטכנולוגיה ובשפעתה על חיינו. לדעתי, חשוב שנשמור על שליטה על הכיוונים שאליהם אנו מתקדמים."
       },
       {
-        "title": "הערכת תועלת ה-BPC‑157: המותג היעיל ביותר בשוק (2026)",
-        "summary": "מדריך לצרכן מ-2026 המעריך את פרטי כמוסות הפפטיד BPC-157.",
-        "details": "המדריך עוסק בהיבטים שונים של המוצר, החל מהשפעותיו על תיקון רמטי ועד לניהול רגולציה הנוגע לניסויים אקדמיים. זהו נושא מעניין שקשור בתהליכי בריאות ואורך חיים.",
-        "personal_note": "כחובבת לונג'ביטי, אני מתעניינת במוצרים שמסייעים לשמור על הבריאות והחיים הארוכים. זהו תחום שממשיך להתפתח, ואני מקווה ללמוד עליו יותר."
+        "title": "תוצאות כספיות של Glucotrack",
+        "summary": "חברת Glucotrack דיווחה על תוצאות כספיות חיוביות לרבעון הרביעי.",
+        "details": "החברה מתכננת להגיש בקשה לבדיקה של מכשירים רפואיים חדשים שמטרתם להביא פתרונות חדשניים לשוק האמריקאי.",
+        "personal_note": "אני מתעניינת בהתקדמות טכנולוגית וחדשנות. יש לי תחושה שהמוצרים שמפותחים כאן עשויים לשפר את חיי רבים."
       }
     ]
   },
   "selected_articles": [
     {
-      "keyword": "new bestselling books",
+      "keyword": "bestselling new books",
       "title": "How Prime Video’s Hit Thriller Series Could Run For More Than 20 Seasons (And Fix a Major Movie Problem)",
       "description": "While only two seasons of Prime Video’s hit thriller show have aired so far, this adaptation of an iconic author’s novel series could potentially last for decades. A great procedural can be a veritable goldmine for a TV network or streaming service. Since bes…",
       "url": "http://comicbook.com/tv-shows/feature/how-prime-videos-hit-thriller-series-could-run-for-more-than-20-seasons-and-fix-a-major-movie-problem/",
@@ -40,13 +40,13 @@
       "image": "https://comicbook.com/wp-content/uploads/sites/4/2026/03/Matthew-Lillard-in-Cross-season-2.jpg?resize=2000,1125"
     },
     {
-      "keyword": "global art news",
-      "title": "Taylor Swift sued by Las Vegas showgirl for trademark infringement",
-      "description": "A Las Vegas performer is suing Taylor Swift for trademark infringement over her latest album’s “showgirl” branding",
-      "url": "https://www.nbcnews.com/pop-culture/pop-culture-news/taylor-swift-sued-las-vegas-showgirl-trademark-infringement-rcna265902",
-      "source": "NBC News",
-      "published_at": "2026-03-30T21:25:48Z",
-      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2025-10/251006-taylor-swift-life-of-a-showgirl-ew-557p-cab74b.jpg"
+      "keyword": "art news exhibitions",
+      "title": "Guillaume Cerutti, Former Christie’s CEO, Leaves Post as Pinault Collection President",
+      "description": "Guillaume Cerutti, the former CEO of Christie's auction house, has left his position at the Pinault Collection after just 13 months.",
+      "url": "https://www.artnews.com/art-news/market/guillaume-cerutti-pinault-collection-president-out-1234779208/",
+      "source": "ARTnews",
+      "published_at": "2026-03-27T19:11:43Z",
+      "image": ""
     },
     {
       "keyword": "astronomy discoveries",
@@ -59,12 +59,12 @@
     },
     {
       "keyword": "longevity research",
-      "title": "ProHealth Longevity BPC‑157 Claims Evaluated: Most Effective BPC157 Peptide Brand on the Market (2026)",
-      "description": "A 2026 consumer information guide examining ProHealth BPC-157 oral peptide capsule details, arginate vs acetate formulation context, preclinical tissue repair research, regulatory status, third-party testing transparency, and what men and women should verify …",
-      "url": "https://www.globenewswire.com/news-release/2026/03/30/3265047/0/en/ProHealth-Longevity-BPC-157-Claims-Evaluated-Most-Effective-BPC157-Peptide-Brand-on-the-Market-2026.html",
+      "title": "Glucotrack Reports Fourth Quarter and Full Year 2025 Financial Results and Recent Corporate Highlights",
+      "description": "Company prepares to file Investigational Device Exemption (IDE) for Novel CBGM Technology, targeting US Clinical Trial Launch in Second Half of 2026  US...",
+      "url": "https://www.globenewswire.com/news-release/2026/03/30/3265051/0/en/Glucotrack-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-and-Recent-Corporate-Highlights.html",
       "source": "GlobeNewswire",
-      "published_at": "2026-03-30T20:36:00Z",
-      "image": "https://ml.globenewswire.com/Resource/Download/6bcbfe0d-2035-47a4-886e-8c75953227b5"
+      "published_at": "2026-03-30T20:50:00Z",
+      "image": "https://ml.globenewswire.com/Resource/Download/bafad597-388b-4b55-bab1-535713ff1321"
     }
   ]
 }

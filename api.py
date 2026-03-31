@@ -23,8 +23,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
-_api_key = os.getenv("API_KEY", "")
-print(f"[api.py]  API_KEY starts with: '{_api_key[:3]}' (len={len(_api_key)})")
+print(f"DEBUG: API_KEY starts with: {os.getenv('API_KEY', '')[:3]}...")
 
 app.add_middleware(
     CORSMiddleware,
@@ -71,9 +70,10 @@ def get_newspaper():
 
 
 @app.post("/update-news")
-async def update_news(request: Request, x_api_key: str = Header(None)):
+async def update_news(request: Request, x_api_key: str = Header(None, alias="x-api-key")):
     """מקבל נתוני עיתון חדשים מהסקריפט המקומי ושומר אותם."""
     expected_key = os.getenv("API_KEY", "")
+    print(f"DEBUG /update-news: received key starts with: {(x_api_key or '')[:3]}... | expected starts with: {expected_key[:3]}...")
     if not expected_key or x_api_key != expected_key:
         raise HTTPException(status_code=401, detail="Unauthorized: invalid or missing API key")
 

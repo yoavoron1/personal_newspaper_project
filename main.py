@@ -17,8 +17,7 @@ from services.news_service import deduplicate_articles, fetch_articles_for_keywo
 
 RAILWAY_URL = "https://web-production-85103.up.railway.app"
 
-_api_key = os.getenv("API_KEY", "")
-print(f"[main.py] API_KEY starts with: '{_api_key[:3]}' (len={len(_api_key)})")
+print(f"DEBUG: API_KEY starts with: {os.getenv('API_KEY', '')[:3]}...")
 
 CACHE_FILE = Path(__file__).resolve().parent / "newspaper_cache.json"
 
@@ -47,11 +46,13 @@ def push_to_railway(newspaper_data: Dict, selected_articles: List[Dict]) -> None
         return
 
     payload = {"newspaper_data": newspaper_data, "selected_articles": selected_articles}
+    headers = {"x-api-key": os.getenv("API_KEY", "")}
+    print(f"DEBUG: sending x-api-key starts with: {headers['x-api-key'][:3]}...")
     try:
         response = http_requests.post(
             f"{RAILWAY_URL}/update-news",
             json=payload,
-            headers={"x-api-key": api_key},
+            headers=headers,
             timeout=30,
         )
         if response.status_code == 200:
