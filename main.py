@@ -45,14 +45,12 @@ def push_to_railway(newspaper_data: Dict, selected_articles: List[Dict]) -> None
         print("\n[WARNING] API_KEY not set — skipping Railway push.")
         return
 
+    print(f"Sending request with API_KEY: {api_key[:3]}...")
     payload = {"newspaper_data": newspaper_data, "selected_articles": selected_articles}
-    headers = {"x-api-key": os.getenv("API_KEY", "")}
-    print(f"Sending request with API_KEY: {headers['x-api-key'][:3]}...")
     try:
         response = http_requests.post(
-            f"{RAILWAY_URL}/update-news",
+            f"{RAILWAY_URL}/update-news?api_key={api_key}",
             json=payload,
-            headers=headers,
             timeout=30,
         )
         if response.status_code == 200:

@@ -81,8 +81,14 @@ def get_newspaper():
 
 
 @app.post("/update-news")
-async def update_news(request: Request):
+async def update_news(request: Request, api_key: str = None):
     """מקבל נתוני עיתון חדשים מהסקריפט המקומי ושומר אותם."""
+    expected_key = os.getenv("API_KEY", "")
+    print(f"Received api_key starts with: {api_key[:3] if api_key else 'NONE'}... | expected starts with: {expected_key[:3] if expected_key else 'NONE'}...")
+
+    if not expected_key or api_key != expected_key:
+        raise HTTPException(status_code=401, detail="Unauthorized: invalid or missing API key")
+
     try:
         body = await request.json()
         if "newspaper_data" not in body or "selected_articles" not in body:
