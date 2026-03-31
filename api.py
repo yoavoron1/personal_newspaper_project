@@ -66,18 +66,24 @@ async def update_news(request: Request, api_key: str = Query(None)):
 def index(request: Request):
     result = load_cached_newspaper()
     if not result:
-        return templates.TemplateResponse("index.html", {
-            "request": request,
-            "title": "העיתון האישי שלך",
-            "intro": "",
-            "articles": [],
-            "coming_soon": True,
-        })
+        return templates.TemplateResponse(
+            request=request,
+            name="index.html",
+            context={
+                "title": "העיתון האישי שלך",
+                "intro": "",
+                "articles": [],
+                "coming_soon": True,
+            },
+        )
     newspaper_data, selected_articles = result
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "title": newspaper_data.get("title", "The Weekly Chronicle"),
-        "intro": newspaper_data.get("intro", ""),
-        "articles": enrich_articles(newspaper_data, selected_articles),
-        "coming_soon": False,
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={
+            "title": newspaper_data.get("title", "The Weekly Chronicle"),
+            "intro": newspaper_data.get("intro", ""),
+            "articles": enrich_articles(newspaper_data, selected_articles),
+            "coming_soon": False,
+        },
+    )
