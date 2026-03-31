@@ -6,6 +6,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import requests as http_requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from config import get_settings
 from services.ai_service import AIService
@@ -13,6 +16,9 @@ from services.email_service import build_email_html, send_email
 from services.news_service import deduplicate_articles, fetch_articles_for_keyword
 
 RAILWAY_URL = "https://web-production-85103.up.railway.app"
+
+_api_key = os.getenv("API_KEY", "")
+print(f"[main.py] API_KEY starts with: '{_api_key[:3]}' (len={len(_api_key)})")
 
 CACHE_FILE = Path(__file__).resolve().parent / "newspaper_cache.json"
 
@@ -35,9 +41,9 @@ def save_newspaper_cache(newspaper_data: Dict, selected_articles: List[Dict]) ->
 
 def push_to_railway(newspaper_data: Dict, selected_articles: List[Dict]) -> None:
     """שולח את נתוני העיתון לשרת Railway כדי לעדכן את האתר."""
-    api_key = os.getenv("UPDATE_API_KEY", "")
+    api_key = os.getenv("API_KEY", "")
     if not api_key:
-        print("\n[WARNING] UPDATE_API_KEY not set — skipping Railway push.")
+        print("\n[WARNING] API_KEY not set — skipping Railway push.")
         return
 
     payload = {"newspaper_data": newspaper_data, "selected_articles": selected_articles}

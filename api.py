@@ -5,11 +5,14 @@ import os
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
@@ -19,6 +22,9 @@ CACHE_FILE = BASE_DIR / "newspaper_cache.json"
 app = FastAPI()
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
+
+_api_key = os.getenv("API_KEY", "")
+print(f"[api.py]  API_KEY starts with: '{_api_key[:3]}' (len={len(_api_key)})")
 
 app.add_middleware(
     CORSMiddleware,
@@ -67,7 +73,7 @@ def get_newspaper():
 @app.post("/update-news")
 async def update_news(request: Request, x_api_key: str = Header(None)):
     """מקבל נתוני עיתון חדשים מהסקריפט המקומי ושומר אותם."""
-    expected_key = os.getenv("UPDATE_API_KEY", "")
+    expected_key = os.getenv("API_KEY", "")
     if not expected_key or x_api_key != expected_key:
         raise HTTPException(status_code=401, detail="Unauthorized: invalid or missing API key")
 
