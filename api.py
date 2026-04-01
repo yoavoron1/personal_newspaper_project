@@ -43,17 +43,21 @@ def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List
         source = selected_articles[idx] if idx < len(selected_articles) else {}
         item = dict(article)
         item["id"] = idx
-        # New Tavily flow: url/image already embedded; old NewsAPI flow: fall back to source
+        # New Tavily flow: fields already embedded; old NewsAPI flow: fall back to source
         item["url"] = item.get("url") or source.get("url", "")
         item["image"] = item.get("image") or source.get("image", "")
-        # Normalise commentary field for old-format articles
-        if "commentary" not in item:
-            item["commentary"] = item.get("personal_note", "")
-        # Ensure bullets list exists (old-format articles won't have it)
+        item["source_name"] = item.get("source_name") or source.get("source_name", "")
+        item["country_origin"] = item.get("country_origin") or source.get("country_origin", "")
+        # short_summary (new): paragraph text for homepage cards
+        item.setdefault("short_summary", "")
+        # bullets (legacy): keep for old-cache backward compatibility
         if "bullets" not in item:
             summary = item.get("summary") or item.get("details") or ""
             item["bullets"] = [summary] if summary else []
-        # Ensure long_summary and personal_impact exist (may be absent in old cache)
+        # Normalise commentary field for old-format articles
+        if "commentary" not in item:
+            item["commentary"] = item.get("personal_note", "")
+        # Ensure deep-dive fields exist
         item.setdefault("long_summary", "")
         item.setdefault("personal_impact", "")
         enriched.append(item)

@@ -2,11 +2,89 @@
 
 from datetime import datetime, timedelta
 from typing import Dict, List
+from urllib.parse import urlparse
 
 import requests
 
 
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
+
+# Readable display names for well-known domains
+_DOMAIN_NAMES: Dict[str, str] = {
+    "techcrunch.com": "TechCrunch", "theverge.com": "The Verge",
+    "wired.com": "Wired", "arstechnica.com": "Ars Technica",
+    "engadget.com": "Engadget", "gizmodo.com": "Gizmodo",
+    "reuters.com": "Reuters", "apnews.com": "AP News",
+    "cnn.com": "CNN", "bbc.com": "BBC", "bbc.co.uk": "BBC",
+    "theguardian.com": "The Guardian", "nytimes.com": "NY Times",
+    "wsj.com": "Wall Street Journal", "bloomberg.com": "Bloomberg",
+    "ft.com": "Financial Times", "economist.com": "The Economist",
+    "washingtonpost.com": "Washington Post", "theatlantic.com": "The Atlantic",
+    "axios.com": "Axios", "politico.com": "Politico",
+    "time.com": "Time", "forbes.com": "Forbes",
+    "businessinsider.com": "Business Insider", "slate.com": "Slate",
+    "nature.com": "Nature", "science.org": "Science",
+    "scientificamerican.com": "Scientific American",
+    "newscientist.com": "New Scientist", "phys.org": "Phys.org",
+    "livescience.com": "Live Science", "futurism.com": "Futurism",
+    "healthline.com": "Healthline", "medicalnewstoday.com": "Medical News Today",
+    "nih.gov": "NIH", "nasa.gov": "NASA", "who.int": "WHO",
+    "space.com": "Space.com", "nationalgeographic.com": "Nat Geo",
+    "mit.edu": "MIT", "stanford.edu": "Stanford", "harvard.edu": "Harvard",
+    "haaretz.com": "Haaretz", "timesofisrael.com": "Times of Israel",
+    "jpost.com": "Jerusalem Post", "ynetnews.com": "Ynet",
+    "vogue.com": "Vogue", "elle.com": "Elle",
+    "independent.co.uk": "The Independent", "thetimes.co.uk": "The Times",
+    "vice.com": "Vice",
+}
+
+_DOMAIN_COUNTRIES: Dict[str, str] = {
+    "bbc.com": "UK", "bbc.co.uk": "UK", "theguardian.com": "UK",
+    "ft.com": "UK", "economist.com": "UK", "newscientist.com": "UK",
+    "thetimes.co.uk": "UK", "independent.co.uk": "UK",
+    "reuters.com": "International", "apnews.com": "USA",
+    "cnn.com": "USA", "nytimes.com": "USA", "wsj.com": "USA",
+    "bloomberg.com": "USA", "washingtonpost.com": "USA",
+    "haaretz.com": "Israel", "timesofisrael.com": "Israel",
+    "jpost.com": "Israel", "ynetnews.com": "Israel",
+}
+
+_TLD_COUNTRIES: Dict[str, str] = {
+    ".co.uk": "UK", ".uk": "UK", ".de": "Germany", ".fr": "France",
+    ".it": "Italy", ".es": "Spain", ".au": "Australia", ".ca": "Canada",
+    ".il": "Israel", ".jp": "Japan", ".cn": "China", ".in": "India",
+    ".br": "Brazil",
+}
+
+
+def _source_name_from_url(url: str) -> str:
+    """מחלץ שם מקור קריא מ-URL."""
+    try:
+        netloc = urlparse(url).netloc.lower()
+        domain = netloc[4:] if netloc.startswith("www.") else netloc
+        if domain in _DOMAIN_NAMES:
+            return _DOMAIN_NAMES[domain]
+        root = domain.split(".")[0]
+        return root.replace("-", " ").title() if root else domain
+    except Exception:
+        return ""
+
+
+def _country_from_url(url: str) -> str:
+    """מנסה להסיק מדינת מקור מה-URL."""
+    try:
+        netloc = urlparse(url).netloc.lower()
+        domain = netloc[4:] if netloc.startswith("www.") else netloc
+        if domain in _DOMAIN_COUNTRIES:
+            return _DOMAIN_COUNTRIES[domain]
+        for tld, country in _TLD_COUNTRIES.items():
+            if domain.endswith(tld):
+                return country
+        if domain.endswith(".gov") or domain.endswith(".edu"):
+            return "USA"
+        return "USA"
+    except Exception:
+        return ""
 
 
 def fetch_articles_with_tavily(
@@ -34,6 +112,7 @@ def fetch_articles_with_tavily(
             results = data.get("results", [])
             images = data.get("images", [])
             for idx, r in enumerate(results):
+                url = (r.get("url") or "").strip()
                 img = (r.get("image") or "").strip()
                 if not img and idx < len(images):
                     img = (images[idx] or "").strip()
@@ -41,9 +120,11 @@ def fetch_articles_with_tavily(
                     "topic": topic,
                     "title": (r.get("title") or "").strip(),
                     "content": (r.get("content") or "").strip(),
-                    "url": (r.get("url") or "").strip(),
+                    "url": url,
                     "score": r.get("score", 0),
                     "image": img,
+                    "source_name": _source_name_from_url(url),
+                    "country_origin": _country_from_url(url),
                 })
             print(f"  Tavily [{topic}] → {len(results)} results")
         except Exception as exc:

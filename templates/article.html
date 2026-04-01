@@ -145,50 +145,6 @@
         border-radius: 9999px;
       }
 
-      /* ── Bullets ── */
-      .bullet-list { list-style: none; padding: 0; margin: 0; }
-      .bullet-list li {
-        display: flex;
-        gap: 0.7rem;
-        align-items: flex-start;
-        padding: 0.55rem 0;
-        font-size: 1.05rem;
-        line-height: 1.65;
-        color: var(--ink-mid);
-        border-bottom: 1px solid #ede8df;
-      }
-      .bullet-list li:last-child { border-bottom: none; }
-      .bullet-dot {
-        flex-shrink: 0;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--gold);
-        margin-top: 0.52rem;
-      }
-
-      /* ── Why it matters box ── */
-      .why-box {
-        background: var(--gold-bg);
-        border-right: 4px solid var(--gold);
-        border-radius: 0.75rem;
-        padding: 1rem 1.1rem;
-      }
-      .why-label {
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 0.35rem;
-      }
-      .why-text {
-        font-size: 1rem;
-        color: #4b3d1a;
-        line-height: 1.6;
-        font-weight: 500;
-      }
-
       /* ── Long summary ── */
       .long-summary p {
         font-size: 1.1rem;
@@ -354,49 +310,45 @@
     <!-- ═══ ARTICLE BODY ═══ -->
     <div class="article-container">
 
-      <!-- Meta row -->
-      <div style="display:flex; align-items:center; gap:0.75rem; margin-top:2rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+      <!-- Meta row: topic tag + article counter -->
+      <div style="display:flex; align-items:center; gap:0.65rem; margin-top:2rem; margin-bottom:1rem; flex-wrap:wrap;">
         {% if article.topic %}
         <span class="topic-tag">{{ article.topic }}</span>
         {% endif %}
-        <span style="font-size:0.78rem; color:var(--muted);">ניתוח מעמיק</span>
-        <span style="font-size:0.78rem; color:var(--border);">•</span>
-        <span style="font-size:0.78rem; color:var(--muted);">כתבה {{ article_id + 1 }} מתוך {{ total_articles }}</span>
+        <span style="font-size:0.75rem; color:var(--muted);">כתבה {{ article_id + 1 }} מתוך {{ total_articles }}</span>
       </div>
 
       <!-- Title -->
-      <h1 style="font-size:clamp(1.7rem,5vw,2.5rem); font-weight:900; color:var(--navy); line-height:1.2; margin-bottom:1.5rem; letter-spacing:-0.02em;">
+      <h1 style="font-size:clamp(1.7rem,5vw,2.5rem); font-weight:900; color:var(--navy); line-height:1.2; margin-bottom:0.75rem; letter-spacing:-0.02em;">
         {{ article.title }}
       </h1>
 
-      <!-- ── Section: Quick Bullets ── -->
-      {% if article.bullets and article.bullets|length > 0 %}
-      <div style="margin-bottom:1.75rem;">
-        <p class="section-heading">נקודות עיקריות</p>
-        <ul class="bullet-list">
-          {% for bullet in article.bullets %}
-          <li>
-            <span class="bullet-dot"></span>
-            <span>{{ bullet }}</span>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
+      <!-- Source + Country metadata line -->
+      {% if article.source_name or article.country_origin %}
+      <p class="text-sm text-gray-500" style="margin-bottom:1.75rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        {% if article.source_name %}
+        <span style="display:inline-flex; align-items:center; gap:0.35rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          מקור: <strong style="font-weight:600; color:#4b5563;">{{ article.source_name }}</strong>
+        </span>
+        {% endif %}
+        {% if article.source_name and article.country_origin %}
+        <span style="color:#d1d5db;">|</span>
+        {% endif %}
+        {% if article.country_origin %}
+        <span style="display:inline-flex; align-items:center; gap:0.35rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          מדינה: <strong style="font-weight:600; color:#4b5563;">{{ article.country_origin }}</strong>
+        </span>
+        {% endif %}
+      </p>
       {% endif %}
 
-      <!-- ── Why it matters ── -->
-      {% if article.why_it_matters %}
-      <div class="why-box" style="margin-bottom:1.75rem;">
-        <p class="why-label">למה זה חשוב</p>
-        <p class="why-text">{{ article.why_it_matters }}</p>
-      </div>
-      {% endif %}
+      <hr class="article-divider" style="margin-top:0; margin-bottom:2rem;" />
 
-      <hr class="article-divider" />
-
-      <!-- ── Long Summary: Deep Analysis ── -->
+      <!-- ── Deep Analysis (long_summary) ── -->
       {% if article.long_summary %}
-      <div style="margin-bottom:2rem;">
+      <div style="margin-bottom:2.25rem;">
         <p class="section-heading">ניתוח מעמיק</p>
         <div class="long-summary">
           {% for paragraph in article.long_summary.split('\n\n') %}
@@ -410,7 +362,7 @@
 
       <!-- ── Personal Impact ── -->
       {% if article.personal_impact %}
-      <div class="impact-box" style="margin-bottom:2rem;">
+      <div class="impact-box" style="margin-bottom:2.25rem;">
         <div class="impact-header">
           <div class="impact-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -421,26 +373,23 @@
       </div>
       {% endif %}
 
-      <!-- ── Personal Note ── -->
-      {% set note = article.personal_note or article.commentary %}
-      {% if note %}
-      <p class="personal-note">{{ note }}</p>
-      {% endif %}
-
       <hr class="article-divider" />
 
-      <!-- ── Source Button ── -->
-      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-        {% if article.url %}
-        <a href="{{ article.url }}" target="_blank" rel="noopener" class="source-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          קרא את הכתבה המלאה במקור
-        </a>
-        {% endif %}
-        <a href="/" style="font-size:0.85rem; font-weight:700; color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <!-- ── Bottom Actions ── -->
+      <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
+        <!-- Back button (prominent) -->
+        <a href="/" style="display:inline-flex; align-items:center; gap:0.5rem; background:#f3f4f6; color:var(--navy); font-size:0.88rem; font-weight:700; padding:0.75rem 1.4rem; border-radius:9999px; text-decoration:none; border:1px solid #e5e7eb; transition:background 0.15s;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           חזרה לעיתון
         </a>
+
+        {% if article.url %}
+        <!-- Read full article (primary CTA) -->
+        <a href="{{ article.url }}" target="_blank" rel="noopener" class="source-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          קרא את הכתבה המלאה{% if article.source_name %} ב-{{ article.source_name }}{% endif %}
+        </a>
+        {% endif %}
       </div>
 
     </div>
