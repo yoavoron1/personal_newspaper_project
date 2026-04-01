@@ -15,6 +15,7 @@ class Settings:
 
     openai_api_key: str
     news_api_key: str
+    tavily_api_key: str
     sender_email: str
     sender_app_password: str
 
@@ -28,6 +29,7 @@ def get_settings(require_email: bool = False) -> Settings:
     return Settings(
         openai_api_key=os.getenv("OPENAI_API_KEY", "").strip().strip('"').strip("'"),
         news_api_key=os.getenv("NEWS_API_KEY", "").strip().strip('"').strip("'"),
+        tavily_api_key=os.getenv("TAVILY_API_KEY", "").strip().strip('"').strip("'"),
         sender_email=os.getenv("SENDER_EMAIL", "").strip().strip('"').strip("'").lower(),
         sender_app_password=os.getenv("SENDER_APP_PASSWORD", "").strip().strip('"').strip("'").replace(" ", ""),
     )

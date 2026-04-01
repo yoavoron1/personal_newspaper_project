@@ -6,6 +6,52 @@ from typing import Dict, List
 import requests
 
 
+TAVILY_SEARCH_URL = "https://api.tavily.com/search"
+
+
+def fetch_articles_with_tavily(
+    topics: List[str],
+    tavily_api_key: str,
+    max_results_per_topic: int = 5,
+) -> List[Dict]:
+    """מביא כתבות עדכניות מ-Tavily Advanced Search לכל נושא (ישירות ב-REST)."""
+    all_results: List[Dict] = []
+
+    for topic in topics:
+        try:
+            payload = {
+                "api_key": tavily_api_key,
+                "query": topic,
+                "search_depth": "advanced",
+                "max_results": max_results_per_topic,
+                "include_answer": False,
+                "include_raw_content": False,
+                "include_images": True,
+            }
+            response = requests.post(TAVILY_SEARCH_URL, json=payload, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            results = data.get("results", [])
+            images = data.get("images", [])
+            for idx, r in enumerate(results):
+                img = (r.get("image") or "").strip()
+                if not img and idx < len(images):
+                    img = (images[idx] or "").strip()
+                all_results.append({
+                    "topic": topic,
+                    "title": (r.get("title") or "").strip(),
+                    "content": (r.get("content") or "").strip(),
+                    "url": (r.get("url") or "").strip(),
+                    "score": r.get("score", 0),
+                    "image": img,
+                })
+            print(f"  Tavily [{topic}] → {len(results)} results")
+        except Exception as exc:
+            print(f"\n[ERROR] Tavily search failed for '{topic}': {exc}")
+
+    return all_results
+
+
 def fetch_articles_for_keyword(
     keyword: str,
     news_key: str,

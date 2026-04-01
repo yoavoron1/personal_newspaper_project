@@ -213,6 +213,94 @@ class AIService:
 
         return selected[:top_n]
 
+    def write_newspaper_from_tavily(
+        self,
+        user_name: str,
+        user_text_input: str,
+        family_info_input: str,
+        writing_style_input: str,
+        tavily_results: List[Dict],
+    ) -> Optional[Dict]:
+        """כותב עיתון אישי מתוצאות Tavily בפורמט חדש עם bullet points ו'למה זה חשוב'."""
+        if not tavily_results:
+            return None
+
+        context_lines = []
+        for i, r in enumerate(tavily_results, start=1):
+            context_lines.append(
+                f"[{i}] TOPIC: {r['topic']}\n"
+                f"    TITLE: {r['title']}\n"
+                f"    CONTENT: {r['content'][:500]}\n"
+                f"    URL: {r['url']}\n"
+            )
+
+        prompt = f"""
+אתה עורך עיתון דיגיטלי אישי בעברית. קיבלת תוצאות חיפוש עדכניות מהאינטרנט.
+
+תפקידך:
+1. סנן clickbait, פרסומות וחדשות שוליות ללא ערך אמיתי
+2. בחר 4-5 כתבות בעלות הערך הגבוה ביותר, שמותאמות לפרופיל המשתמש
+3. כתוב סיכום בעברית לכל כתבה שבחרת
+
+החזר JSON בפורמט הבא בלבד:
+{{
+  "title": "כותרת העיתון (יצירתית, בעברית)",
+  "intro": "פתיחה אישית קצרה ומחממת למשתמש (1-2 משפטים)",
+  "articles": [
+    {{
+      "title": "כותרת הכתבה בעברית",
+      "topic": "נושא הכתבה",
+      "bullets": [
+        "נקודה ראשונה — עובדה/ממצא עיקרי",
+        "נקודה שנייה — הרחבה או זווית נוספת",
+        "נקודה שלישית — פרט משמעותי או השלכה"
+      ],
+      "why_it_matters": "למה זה חשוב — הסבר קצר, ממוקד ומשמעותי (משפט אחד עד שניים)",
+      "personal_note": "הערה אישית רלוונטית למשתמש הספציפי (תוך התחשבות בגיל, תחומי עניין ורקע)",
+      "source_id": 3
+    }}
+  ]
+}}
+
+חוקים:
+- כתוב רק בעברית
+- source_id הוא מספר התוצאה המקורית מהרשימה למטה (מספר שלם)
+- 3 bullet points בדיוק לכל כתבה
+- why_it_matters: קצר, חד, בעל ערך אמיתי
+- personal_note: אישי ורלוונטי לפרופיל המשתמש
+
+שם המשתמש: {user_name}
+תחומי עניין: {user_text_input}
+רקע אישי: {family_info_input}
+סגנון כתיבה: {writing_style_input}
+
+תוצאות חיפוש:
+{chr(10).join(context_lines)}
+        """
+
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4o",
+                messages=[{"role": "user", "content": prompt}],
+                response_format={"type": "json_object"},
+            )
+            newspaper_data = json.loads(response.choices[0].message.content)
+        except Exception as exc:
+            print(f"\n[ERROR] Failed to write newspaper from Tavily: {exc}")
+            return None
+
+        for article in newspaper_data.get("articles", []):
+            source_id = article.get("source_id")
+            if isinstance(source_id, int) and 1 <= source_id <= len(tavily_results):
+                source = tavily_results[source_id - 1]
+                article["url"] = source.get("url", "")
+                article["image"] = source.get("image", "")
+            else:
+                article.setdefault("url", "")
+                article.setdefault("image", "")
+
+        return newspaper_data
+
     def write_newspaper(
         self,
         user_name: str,

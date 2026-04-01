@@ -42,10 +42,16 @@ def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List
     for idx, article in enumerate(newspaper_data.get("articles", [])):
         source = selected_articles[idx] if idx < len(selected_articles) else {}
         item = dict(article)
-        item["url"] = source.get("url", "")
-        item["image"] = source.get("image", "")
+        # New Tavily flow: url/image already embedded; old NewsAPI flow: fall back to source
+        item["url"] = item.get("url") or source.get("url", "")
+        item["image"] = item.get("image") or source.get("image", "")
+        # Normalise commentary field for old-format articles
         if "commentary" not in item:
             item["commentary"] = item.get("personal_note", "")
+        # Ensure bullets list exists (old-format articles won't have it)
+        if "bullets" not in item:
+            summary = item.get("summary") or item.get("details") or ""
+            item["bullets"] = [summary] if summary else []
         enriched.append(item)
     return enriched
 

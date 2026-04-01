@@ -1,70 +1,70 @@
 {
   "newspaper_data": {
-    "title": "עיתון שבועי אישי - רחל מינץ",
-    "intro": "ברוכים הבאים לגיליון השבועי שלי! כאן תמצאו כתבות קצרות על תחומי העניין שלי, עם אפשרות להתרחב לפי רצונכם.",
+    "title": "חדשות השבוע עם רחל מינץ",
+    "intro": "מהדורת השבוע שלנו יוצאת לדרך עם מגוון כתבות מעניינות ועדכונים על תחומי העניין שלכם.",
     "articles": [
       {
-        "title": "מניעת פשעים ובניית סדרות: הכתבה על הסדרה החדש של Prime Video",
-        "summary": "העיבוד החדש של סדרת ספרים אייקונית יכול להימשך מעל ל-20 עונות.",
-        "details": "בעוד שעונותיה הראשונות של הסדרה שודרו, יש פוטנציאל להתרחבות משמעותית בתכנים שמהם תוכל החברה להרוויח. בשוק התקשורת הנוכחי, סדרה מצליחה יכולה להיות אבן שואבת לקהל.",
-        "personal_note": "אוהבת לראות סדרות באיכות גבוהה, זה יכול להיות חוויה מעשירה."
+        "title": "גיומ א סרוטי, מנכ\"ל לשעבר של כריסטי, עוזב את תפקידו כנשיא אוסף פינו",
+        "summary": "גיומ א סרוטי, מנכ\"ל לשעבר של בית המכירות כריסטי, עזב את תפקידו כנשיא אוסף פינו לאחר 13 חודשים בלבד.",
+        "details": "גיומ א סרוטי, אשר היה מנהיג בכיר בעולם האומנות, הספיק לקדם מגוון פרויקטים בתקופתו הקצרה באוסף הפינו. פינו עצמו לא הגיב על עזיבתו.",
+        "personal_note": "התחום האומנותי תמיד מעניין אותי, ומעניין לראות את השפעתם של מנהיגים שונים על האומנות. האם ישנם אמנים חדשים שצמחו תוך כדי כהונתו?"
       },
       {
-        "title": "תביעה מעניינת: טיילור סוויפט והמותג של 'שואו-גירל'",
-        "summary": "זמרת מפורסמת נתבעת על ידי אמנית בווגאס.",
-        "details": "שואגת אמנות יתראש מתביעה על כך שהיא הפרה סימן מסחרי בנוגע למותג החדש שלה שקשור להופעות והופעות.",
-        "personal_note": "סקרן אותי לדעת מה ייצא מזה - המשפטים של ידוענים תמיד מציעים המון דרמה!"
+        "title": "10 תערוכות האומנות בלונדון שאנחנו מצפים להן באביב 2026",
+        "summary": "מתוך המאסטרים הבארוקיים שהתגלו מחדש ועד לפיסול מודרניסטי בסביבה מרהיבה, זה מה שאנחנו מצפים לראות בעונה הקרובה.",
+        "details": "בין התערוכות שצפויות להיות, נמצא את יצירותיהם של אמנים בולטים במוזיאונים המרכזיים של לונדון. תערוכות אלו מציעות חוויה ייחודית לכל חובב אמנות.",
+        "personal_note": "אני תמיד מחפשת תערוכות חדשות, אולי אציע לנכדים ללכת יחד לאחת מהן בשבוע הבא!"
       },
       {
-        "title": "מוזיאון טוקיו שכבש את ליבי: TeamLab Planets",
-        "summary": "המוזיאון המרגש בטוקיו הפך לאטרקציה מובילה.",
-        "details": "נכנסתי למוזיאון הדיגיטלי, ונדהמתי מהתחושה המוחשית שהמיצגים מעניקים. הוא הראה לי את המהות של האמנות והחדשנות.",
-        "personal_note": "תמיד רציתי לבקר ביפן. עכשיו אני בטוחה שהמוזיאון הזה יהיה על liste de mes priorités."
+        "title": "משימת מרס הגרעינית של נאס\"א, עליית הפליטות הפחמניות במלחמת איראן וניסוי חיסון תקווה של פייזר נגד ליים",
+        "summary": "משימת מרס הגרעינית של נאס\"א נתקלת באתגרים שונים, בעוד שהמלחמה באיראן גורמת לעלייה בפליטות.",
+        "details": "במקביל, פייזר מדווחת על התקדמות בניסוי חיסון נגד מחלת הליים, דבר שמעורר תקוות חדשות בתחום הבריאות הציבורית.",
+        "personal_note": "אני עוקבת אחרי התפתחויות באסטרונומיה כבר זמן רב, והנושא הזה מאוד מעניין אותי. מרגש לדעת על חידושים טכנולוגיים שעשויים לשפר את חיינו."
       },
       {
-        "title": "הופעת האוליגרכיה הדיגיטלית: מה צופן העתיד?",
-        "summary": "העידן הטכנולוגי וההשפעות המרתקות של אינטליגנציה מלאכותית.",
-        "details": "הבינה המלאכותית היא לא רק כלי, אלא יכולה לשפוט את הכיוונים שבהם חברתנו נודדת. האם נמשיך להיות הסופרים של הסיפור שלנו או שניתן למערכות לכתוב את הדף הבא?",
-        "personal_note": "נושא מרתק שמעסיק אותי, במיוחד כמישהי שמעורבת בחינוך וטכנולוגיה."
+        "title": "פרק הכי מפורר של אינווירנבל מעורר שאלות לגבי עתיד הסדרה",
+        "summary": "הפרק הרביעי בעונה הרביעית של אינווירנבל הביא תגובות מעורבות מהקהל, מה שמעורר חוסר ודאות לגבי מה שצפוי בהמשך.",
+        "details": "הסדרה, שזכתה לחיבה רבה, מתמודדת עם תגובות מעורבות בעקבות אחד הפרקים האחרונים. הפאנלים והעוקבים של הסדרה מתחלקים בדעותיהם.",
+        "personal_note": "אני אוהבת סדרות איכותיות, ואינווירנבל בהחלט כזו. מעניין מה יקרה בהמשך ואילו טוויסטים ימתינו לנו."
       }
     ]
   },
   "selected_articles": [
     {
-      "keyword": "bestselling new books",
-      "title": "How Prime Video’s Hit Thriller Series Could Run For More Than 20 Seasons (And Fix a Major Movie Problem)",
-      "description": "While only two seasons of Prime Video’s hit thriller show have aired so far, this adaptation of an iconic author’s novel series could potentially last for decades. A great procedural can be a veritable goldmine for a TV network or streaming service. Since bes…",
-      "url": "http://comicbook.com/tv-shows/feature/how-prime-videos-hit-thriller-series-could-run-for-more-than-20-seasons-and-fix-a-major-movie-problem/",
-      "source": "ComicBook.com",
-      "published_at": "2026-03-30T18:30:00Z",
-      "image": "https://comicbook.com/wp-content/uploads/sites/4/2026/03/Matthew-Lillard-in-Cross-season-2.jpg?resize=2000,1125"
+      "keyword": "art news exhibitions",
+      "title": "Guillaume Cerutti, Former Christie’s CEO, Leaves Post as Pinault Collection President",
+      "description": "Guillaume Cerutti, the former CEO of Christie's auction house, has left his position at the Pinault Collection after just 13 months.",
+      "url": "https://www.artnews.com/art-news/market/guillaume-cerutti-pinault-collection-president-out-1234779208/",
+      "source": "ARTnews",
+      "published_at": "2026-03-27T19:11:43Z",
+      "image": ""
     },
     {
-      "keyword": "global art news",
-      "title": "Taylor Swift sued by Las Vegas showgirl for trademark infringement",
-      "description": "A Las Vegas performer is suing Taylor Swift for trademark infringement over her latest album’s “showgirl” branding",
-      "url": "https://www.nbcnews.com/pop-culture/pop-culture-news/taylor-swift-sued-las-vegas-showgirl-trademark-infringement-rcna265902",
-      "source": "NBC News",
-      "published_at": "2026-03-30T21:25:48Z",
-      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2025-10/251006-taylor-swift-life-of-a-showgirl-ew-557p-cab74b.jpg"
+      "keyword": "art news exhibitions",
+      "title": "The 10 London art exhibitions we’re most excited about in spring 2026",
+      "description": "From rediscovered baroque masters to modernist sculptures in an spectacular setting, here’s what we’re looking forward to seeing this season",
+      "url": "https://www.timeout.com/london/news/the-10-london-art-exhibitions-were-most-excited-about-in-spring-2026-032726",
+      "source": "Time Out",
+      "published_at": "2026-03-27T15:03:50Z",
+      "image": "https://media.timeout.com/images/106293959/image.jpg"
     },
     {
-      "keyword": "new exhibitions",
-      "title": "I thought this Tokyo museum would be a major tourist trap. It ended up being a highlight of my first trip to Japan.",
-      "description": "TeamLab Planets, a huge immersive art museum, has become one of the most popular attractions in Tokyo, Japan. It's worth a visit.",
-      "url": "https://www.businessinsider.com/teamlab-planets-museum-tokyo-japan-review",
-      "source": "Business Insider",
-      "published_at": "2026-03-30T21:12:21Z",
-      "image": "https://i.insider.com/68471e70f748d8c055f3515c?width=1200&format=jpeg"
+      "keyword": "space exploration discoveries",
+      "title": "NASA’s nuclear Mars mission, Iran war’s carbon emissions surge and Pfizer’s promising Lyme vaccine trial",
+      "description": "NASA’s nuclear Mars mission, the Iran war’s carbon fallout, the looming climate cost of rebuilding and a hopeful new Lyme vaccine",
+      "url": "https://www.scientificamerican.com/podcast/episode/nasas-nuclear-mars-mission-iran-wars-carbon-emissions-surge-and-pfizers/",
+      "source": "Scientific American",
+      "published_at": "2026-03-30T10:00:00Z",
+      "image": "https://static.scientificamerican.com/dam/m/419862d59451339/original/2603_SQ_MON_MARCH_30.png?m=1774636298.811&w=1200"
     },
     {
-      "keyword": "astronomy discoveries",
-      "title": "The Rise of the Digital Oligarchy",
-      "description": "AI has pushed society into a period of tumult and confusion. What comes next will determine if humanity remains the author of its own story, or if it is quietly written out",
-      "url": "http://www.rollingstone.com/politics/political-commentary/rise-digital-oligarchy-ai-era-1235534437/",
-      "source": "Rolling Stone",
-      "published_at": "2026-03-29T13:00:00Z",
-      "image": "https://www.rollingstone.com/wp-content/uploads/2026/03/The-Digital-Interregnum_Final.jpg?crop=0px%2C830px%2C1800px%2C1012px&resize=1600%2C900"
+      "keyword": "high-quality new series",
+      "title": "Invincible's Most Divisive Episode Ever Raises Questions About The Show's Future",
+      "description": "Invincible season 4, episode 4 has brought divisive reactions from a typically thrilled fandom, leaving uncertainty about what is to come.",
+      "url": "https://screenrant.com/invincible-season-4-episode-4-divisive-reaction-future/",
+      "source": "Screen Rant",
+      "published_at": "2026-03-30T21:50:19Z",
+      "image": "https://static0.srcdn.com/wordpress/wp-content/uploads/2026/03/tcdinvi_zu125.jpg?w=1600&h=900&fit=crop"
     }
   ]
 }
