@@ -13,44 +13,58 @@
     />
     <style>
       :root {
-        --navy: #1a2744;
-        --gold: #b8962e;
-        --gold-light: #f5e9c4;
-        --cream: #f7f3ec;
-        --ink: #1e1e1e;
-        --muted: #6b7280;
+        --navy:          #1C2B3A;
+        --navy-mid:      #243550;
+        --bronze:        #9C7A3C;
+        --bronze-light:  #EDE5D0;
+        --bronze-bg:     #F7F3E8;
+        --page-bg:       #FDFBF7;
+        --card-bg:       #F5F2EA;
+        --card-border:   #E8E4D8;
+        --ink:           #1A1A1A;
+        --ink-mid:       #3D3830;
+        --muted:         #7C7268;
+        --divider:       #D4CEBC;
       }
 
       * { box-sizing: border-box; }
 
       body {
         font-family: "Heebo", "Assistant", system-ui, sans-serif;
-        background-color: var(--cream);
+        background-color: var(--page-bg);
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
       }
 
       /* Masthead */
       .masthead {
-        background-color: var(--navy);
+        background: linear-gradient(160deg, #1C2B3A 0%, #162236 60%, #1A2744 100%);
         color: #fff;
-        padding: 2rem 1.5rem 1.5rem;
+        padding: 2.25rem 1.5rem 1.75rem;
         text-align: center;
         position: relative;
         overflow: hidden;
+        border-bottom: 1px solid rgba(232,228,216,0.12);
       }
       .masthead::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at 50% 0%, rgba(184,150,46,0.18) 0%, transparent 70%);
+        background: radial-gradient(ellipse at 50% -10%, rgba(156,122,60,0.22) 0%, transparent 65%);
         pointer-events: none;
+      }
+      .masthead::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, rgba(156,122,60,0.6) 40%, rgba(156,122,60,0.6) 60%, transparent);
       }
       .masthead-eyebrow {
         font-size: 0.65rem;
-        letter-spacing: 0.3em;
+        letter-spacing: 0.35em;
         text-transform: uppercase;
-        color: rgba(255,255,255,0.55);
+        color: rgba(237,229,208,0.6);
         margin-bottom: 0.6rem;
       }
       .masthead-title {
@@ -63,22 +77,23 @@
       .masthead-rule {
         width: 3rem;
         height: 2px;
-        background: var(--gold);
+        background: var(--bronze);
         margin: 1rem auto 0.8rem;
         border-radius: 9999px;
+        opacity: 0.85;
       }
       .masthead-intro {
         font-size: 1rem;
-        color: rgba(255,255,255,0.72);
+        color: rgba(237,229,208,0.75);
         max-width: 540px;
         margin: 0 auto;
         font-weight: 400;
-        line-height: 1.6;
+        line-height: 1.65;
       }
       .masthead-dateline {
-        font-size: 0.72rem;
-        letter-spacing: 0.2em;
-        color: rgba(255,255,255,0.38);
+        font-size: 0.68rem;
+        letter-spacing: 0.22em;
+        color: rgba(237,229,208,0.35);
         margin-top: 1.2rem;
         text-transform: uppercase;
       }
@@ -90,27 +105,28 @@
         gap: 0.75rem;
         margin: 2.5rem 0 1.5rem;
       }
-      .section-divider span.line { flex: 1; height: 1px; background: #d1ccc3; }
+      .section-divider span.line { flex: 1; height: 1px; background: var(--divider); }
       .section-divider span.label {
-        font-size: 0.72rem;
-        letter-spacing: 0.25em;
+        font-size: 0.68rem;
+        letter-spacing: 0.28em;
         text-transform: uppercase;
         color: var(--muted);
-        font-weight: 600;
+        font-weight: 700;
         white-space: nowrap;
       }
 
       /* Article card */
       .article-card {
-        background: #fff;
+        background: var(--card-bg);
         border-radius: 1.25rem;
         overflow: hidden;
-        border: 1px solid #e8e2d9;
-        box-shadow: 0 2px 12px rgba(26,39,68,0.06);
-        transition: box-shadow 0.2s, transform 0.2s;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 1px 4px rgba(28,43,58,0.04), 0 0 0 0 transparent;
+        transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
       }
       .article-card:hover {
-        box-shadow: 0 6px 28px rgba(26,39,68,0.12);
+        border-color: #D4CEBC;
+        box-shadow: 0 6px 24px rgba(28,43,58,0.09);
         transform: translateY(-2px);
       }
 
@@ -118,12 +134,12 @@
       .topic-tag {
         display: inline-block;
         background: var(--navy);
-        color: #fff;
-        font-size: 0.65rem;
+        color: rgba(237,229,208,0.92);
+        font-size: 0.62rem;
         font-weight: 700;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        padding: 0.3rem 0.75rem;
+        padding: 0.28rem 0.75rem;
         border-radius: 9999px;
       }
 
@@ -136,8 +152,8 @@
         padding: 0.4rem 0;
         font-size: 1rem;
         line-height: 1.6;
-        color: #374151;
-        border-bottom: 1px solid #f0ece5;
+        color: var(--ink-mid);
+        border-bottom: 1px solid var(--card-border);
       }
       .bullet-list li:last-child { border-bottom: none; }
       .bullet-dot {
@@ -145,42 +161,43 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: var(--gold);
+        background: var(--bronze);
         margin-top: 0.48rem;
+        opacity: 0.8;
       }
 
       /* Why it matters */
       .why-box {
-        background: var(--gold-light);
-        border-right: 3px solid var(--gold);
+        background: var(--bronze-bg);
+        border-right: 3px solid var(--bronze);
         border-radius: 0.75rem;
         padding: 0.85rem 1rem;
         margin-top: 1rem;
       }
       .why-label {
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         font-weight: 800;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: var(--gold);
+        color: var(--bronze);
         margin-bottom: 0.3rem;
       }
       .why-text {
         font-size: 0.95rem;
-        color: #4b3d1a;
-        line-height: 1.55;
+        color: var(--ink-mid);
+        line-height: 1.58;
         font-weight: 500;
       }
 
       /* Personal note */
       .personal-note {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         color: var(--muted);
         font-style: italic;
         margin-top: 0.9rem;
         padding-top: 0.9rem;
-        border-top: 1px dashed #ddd8cf;
-        line-height: 1.55;
+        border-top: 1px dashed var(--divider);
+        line-height: 1.58;
       }
 
       /* Read more link */
@@ -197,40 +214,38 @@
         position: relative;
         z-index: 1;
       }
-      .read-more:hover { color: var(--gold); }
+      .read-more:hover { color: var(--bronze); }
       .read-more svg { transition: transform 0.15s; }
       .read-more:hover svg { transform: translateX(-3px); }
 
-      /* Clickable card overlay */
-      .card-link {
-        cursor: pointer;
-        transition: box-shadow 0.2s, transform 0.2s;
-      }
+      /* Clickable card */
+      .card-link { cursor: pointer; }
       .card-link:hover {
-        box-shadow: 0 8px 32px rgba(26,39,68,0.15);
+        box-shadow: 0 8px 28px rgba(28,43,58,0.11);
         transform: translateY(-3px);
+        border-color: #C8C2B0;
       }
       .card-link:focus-visible {
-        outline: 3px solid var(--gold);
-        outline-offset: 2px;
+        outline: 2px solid var(--bronze);
+        outline-offset: 3px;
       }
       .deep-dive-badge {
         display: inline-flex;
         align-items: center;
         gap: 0.3rem;
-        font-size: 0.72rem;
+        font-size: 0.68rem;
         font-weight: 700;
-        color: rgba(255,255,255,0.85);
+        color: rgba(237,229,208,0.8);
         background: var(--navy);
-        border: 1px solid rgba(255,255,255,0.2);
-        padding: 0.28rem 0.65rem;
+        border: 1px solid rgba(237,229,208,0.15);
+        padding: 0.26rem 0.65rem;
         border-radius: 9999px;
         letter-spacing: 0.08em;
       }
 
-      /* Hero image placeholder */
+      /* Hero image bg */
       .img-placeholder {
-        background: linear-gradient(135deg, #e8e2d9 0%, #d6cfc4 100%);
+        background: linear-gradient(135deg, #DDD8CC 0%, #CAC4B6 100%);
       }
 
       /* Coming soon animation */
@@ -292,16 +307,14 @@
           onkeydown="if(event.key==='Enter')window.location.href='/article/0'"
           aria-label="קרא כתבה: {{ hero.title }}"
         >
-          {% if hero.image %}
-          <div style="aspect-ratio:16/7; overflow:hidden;">
+          <div style="aspect-ratio:16/7; overflow:hidden; background:var(--card-border);">
             <img
-              src="{{ hero.image }}"
+              src="{{ hero.image or 'https://source.unsplash.com/featured/800x500/?news,journalism' }}"
               alt="{{ hero.title }}"
               style="width:100%; height:100%; object-fit:cover; display:block;"
-              onerror="this.parentElement.style.display='none'"
+              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop&q=80'"
             />
           </div>
-          {% endif %}
 
           <div style="padding:1.75rem 1.5rem 1.75rem;">
             <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
@@ -320,11 +333,11 @@
             </h2>
 
             {% if hero.source_name %}
-            <p class="text-sm text-gray-500" style="margin-bottom:1.1rem;">{{ hero.source_name }}{% if hero.country_origin %} &nbsp;·&nbsp; {{ hero.country_origin }}{% endif %}</p>
+            <p style="font-size:0.8rem; color:var(--muted); margin-bottom:1.1rem; letter-spacing:0.02em;">{{ hero.source_name }}{% if hero.country_origin %} &nbsp;·&nbsp; {{ hero.country_origin }}{% endif %}</p>
             {% endif %}
 
             {% if hero.short_summary %}
-            <p style="font-size:1.05rem; line-height:1.75; color:#374151; margin-bottom:1rem;">{{ hero.short_summary }}</p>
+            <p style="font-size:1.05rem; line-height:1.78; color:var(--ink-mid); margin-bottom:1rem;">{{ hero.short_summary }}</p>
             {% elif hero.bullets and hero.bullets|length > 0 %}
             <ul class="bullet-list">
               {% for bullet in hero.bullets %}
@@ -332,7 +345,7 @@
               {% endfor %}
             </ul>
             {% elif hero.summary %}
-            <p style="font-size:1.05rem; line-height:1.75; color:#374151;">{{ hero.summary }}</p>
+            <p style="font-size:1.05rem; line-height:1.78; color:var(--ink-mid);">{{ hero.summary }}</p>
             {% endif %}
 
             {% if hero.why_it_matters %}
@@ -379,16 +392,14 @@
           onkeydown="if(event.key==='Enter')window.location.href='/article/{{ article.id }}'"
           aria-label="קרא כתבה: {{ article.title }}"
         >
-          {% if article.image %}
-          <div style="aspect-ratio:16/9; overflow:hidden; flex-shrink:0;">
+          <div style="aspect-ratio:16/9; overflow:hidden; flex-shrink:0; background:var(--card-border);">
             <img
-              src="{{ article.image }}"
+              src="{{ article.image or 'https://source.unsplash.com/featured/800x500/?news,journalism' }}"
               alt="{{ article.title }}"
               style="width:100%; height:100%; object-fit:cover; display:block;"
-              onerror="this.parentElement.style.display='none'"
+              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop&q=80'"
             />
           </div>
-          {% endif %}
 
           <div style="padding:1.25rem 1.25rem 1.25rem; flex:1; display:flex; flex-direction:column;">
             <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.85rem; flex-wrap:wrap;">
@@ -402,11 +413,11 @@
             </h3>
 
             {% if article.source_name %}
-            <p class="text-sm text-gray-500" style="margin-bottom:0.85rem;">{{ article.source_name }}{% if article.country_origin %} &nbsp;·&nbsp; {{ article.country_origin }}{% endif %}</p>
+            <p style="font-size:0.78rem; color:var(--muted); margin-bottom:0.85rem; letter-spacing:0.02em;">{{ article.source_name }}{% if article.country_origin %} &nbsp;·&nbsp; {{ article.country_origin }}{% endif %}</p>
             {% endif %}
 
             {% if article.short_summary %}
-            <p style="font-size:0.95rem; line-height:1.7; color:#374151; flex:1;">{{ article.short_summary }}</p>
+            <p style="font-size:0.95rem; line-height:1.72; color:var(--ink-mid); flex:1;">{{ article.short_summary }}</p>
             {% elif article.bullets and article.bullets|length > 0 %}
             <ul class="bullet-list" style="flex:1;">
               {% for bullet in article.bullets %}
@@ -414,7 +425,7 @@
               {% endfor %}
             </ul>
             {% elif article.summary %}
-            <p style="font-size:0.95rem; line-height:1.7; color:#374151; flex:1;">{{ article.summary }}</p>
+            <p style="font-size:0.95rem; line-height:1.72; color:var(--ink-mid); flex:1;">{{ article.summary }}</p>
             {% endif %}
 
             {% if article.why_it_matters %}
@@ -425,7 +436,7 @@
             {% endif %}
 
             <div style="display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:1rem; position:relative; z-index:1;">
-              <span style="font-size:0.78rem; font-weight:700; color:var(--gold);">לחץ לקריאה מלאה ←</span>
+              <span style="font-size:0.75rem; font-weight:700; color:var(--bronze); letter-spacing:0.04em;">לחץ לקריאה מלאה ←</span>
               {% if article.url %}
               <a
                 href="{{ article.url }}"
@@ -449,7 +460,7 @@
     </main>
 
     <!-- ═══ FOOTER ═══ -->
-    <footer style="background:var(--navy); color:rgba(255,255,255,0.45); text-align:center; padding:1.5rem 1rem; font-size:0.75rem; letter-spacing:0.1em;">
+    <footer style="background:linear-gradient(160deg,#1C2B3A 0%,#162236 100%); color:rgba(237,229,208,0.4); text-align:center; padding:1.75rem 1rem; font-size:0.72rem; letter-spacing:0.15em; border-top:1px solid rgba(232,228,216,0.08);">
       עיתון אישי &bull; נוצר באמצעות AI &bull; לשימוש אישי בלבד
     </footer>
   </body>

@@ -2,10 +2,24 @@
 
 import json
 from typing import Dict, List, Optional
+from urllib.parse import quote
 
 from openai import OpenAI
 
 from utils.json_utils import safe_json_loads
+
+UNSPLASH_FALLBACK = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop&q=80"
+
+
+def _unsplash_url(article: Dict) -> str:
+    """בונה URL לתמונה מ-Unsplash לפי מילות המפתח שה-AI סיפק."""
+    raw = (article.get("image_keywords") or "").strip()
+    if not raw:
+        # Fall back to topic if no keywords
+        raw = (article.get("topic") or "news journalism").strip()
+    words = [w.strip(".,;:") for w in raw.split() if w.strip()][:4]
+    slug = quote(",".join(words), safe=",")
+    return f"https://source.unsplash.com/featured/800x500/?{slug}"
 
 
 class AIService:
@@ -255,19 +269,20 @@ class AIService:
       "why_it_matters": "למה זה חשוב — משפט אחד עד שניים, ממוקד ובעל ערך אמיתי.",
       "personal_note": "הערה אישית רלוונטית למשתמש הספציפי, תוך התחשבות בגיל, תחומי עניין ורקע.",
       "long_summary": "פסקה ראשונה — הקשר ורקע: הצב את האירוע בהקשרו הרחב. מה השתנה, מדוע זה חשוב עכשיו, ומהי המשמעות ההיסטורית, המדעית או התרבותית (3-4 משפטים).\\n\\nפסקה שנייה — פרטים ונתונים: פרט את הממצאים הטכניים, הנתונים הכמותיים, שמות הגופים המעורבים, ומה בדיוק הוכח, הוכרז או התרחש (3-4 משפטים). היה מדויק ועמוק — הקורא אינו מסתפק בשטחיות.\\n\\nפסקה שלישית — השלכות ועתיד: לאן זה מוביל, מה עשוי להשתנות, ומה הזווית הביקורתית שמי שמעמיק בתחום זה חייב להכיר (3-4 משפטים). אל תחזור על תוכן short_summary או why_it_matters.",
-      "personal_impact": "השפעה אישית: נתח כיצד חדשות זו משפיעה ספציפית על {user_name} — {family_info_input.strip()}. כתוב 2-3 משפטים שמחברים את הנושא לעולמות העניין הספציפיים שלו (פיזיקה קוונטית, אומנות פוסט-מודרנית, ארכיטקטורה, esports, יאידו, אימונים) ולאורח חייו.",
+      "personal_impact": "השפעה אישית: נתח כיצד חדשות זו קשורה ספציפית ל{user_name} — {family_info_input.strip()}. כתוב 2-3 משפטים בעברית גבוהה, המחברים את הנושא לתחומי ענין שלו (טניס, מוזיקה, אופנה, פרנסס טיאפו) ולקהילת הקרובים לו.",
+      "image_keywords": "three descriptive English words capturing the visual essence of this story (e.g. 'tennis player court' or 'fashion runway model')",
       "source_id": 3
     }}
   ]
 }}
 
 חוקים:
-- כתוב רק בעברית
+- כתוב רק בעברית (למעט image_keywords שחייב להיות באנגלית)
 - source_id הוא מספר התוצאה המקורית מהרשימה למטה (מספר שלם)
 - short_summary: פסקה אחת קצרה (2-3 משפטים), לא רשימה, מעוררת סקרנות
 - why_it_matters: קצר, חד, שונה מ-short_summary
 - long_summary: בדיוק 3 פסקאות מופרדות ב-\\n\\n, לא חוזר על short_summary או why_it_matters
-- personal_impact: מתייחס לרקע במדעי החיים, חינוך ותוכניות לימודים
+- image_keywords: בדיוק 3 מילים באנגלית, ספציפיות וויזואליות (לדוגמה: "tennis serve stadium" ולא "sports news")
 
 שם המשתמש: {user_name}
 תחומי עניין: {user_text_input}
@@ -295,14 +310,16 @@ class AIService:
             if isinstance(source_id, int) and 1 <= source_id <= len(tavily_results):
                 source = tavily_results[source_id - 1]
                 article["url"] = source.get("url", "")
-                article["image"] = source.get("image", "")
                 article["source_name"] = source.get("source_name", "")
                 article["country_origin"] = source.get("country_origin", "")
+                # Prefer Tavily image; fall back to Unsplash keyword search
+                tavily_img = source.get("image", "").strip()
+                article["image"] = tavily_img if tavily_img else _unsplash_url(article)
             else:
                 article.setdefault("url", "")
-                article.setdefault("image", "")
                 article.setdefault("source_name", "")
                 article.setdefault("country_origin", "")
+                article["image"] = _unsplash_url(article)
 
         return newspaper_data
 

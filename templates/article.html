@@ -13,25 +13,27 @@
     />
     <style>
       :root {
-        --navy: #1a2744;
-        --navy-mid: #243460;
-        --gold: #b8962e;
-        --gold-light: #f5e9c4;
-        --gold-bg: #fffbf0;
-        --cream: #f7f3ec;
-        --ink: #1e1e1e;
-        --ink-mid: #374151;
-        --muted: #6b7280;
-        --border: #e8e2d9;
-        --impact-bg: #eef4ff;
-        --impact-border: #3b5bdb;
+        --navy:          #1C2B3A;
+        --navy-mid:      #243550;
+        --bronze:        #9C7A3C;
+        --bronze-light:  #EDE5D0;
+        --bronze-bg:     #F7F3E8;
+        --page-bg:       #FDFBF7;
+        --card-bg:       #F5F2EA;
+        --card-border:   #E8E4D8;
+        --ink:           #1A1A1A;
+        --ink-mid:       #3D3830;
+        --muted:         #7C7268;
+        --divider:       #D4CEBC;
+        --impact-bg:     #EAF0FA;
+        --impact-border: #3B5BDB;
       }
 
       * { box-sizing: border-box; }
 
       body {
         font-family: "Heebo", "Assistant", system-ui, sans-serif;
-        background-color: var(--cream);
+        background-color: var(--page-bg);
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
       }
@@ -41,35 +43,36 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        background: var(--navy);
+        background: linear-gradient(135deg, #1C2B3A 0%, #162236 100%);
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 1.25rem;
         height: 54px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        box-shadow: 0 2px 16px rgba(0,0,0,0.22);
+        border-bottom: 1px solid rgba(232,228,216,0.1);
       }
       .topbar-back {
         display: inline-flex;
         align-items: center;
         gap: 0.45rem;
-        color: rgba(255,255,255,0.9);
+        color: rgba(237,229,208,0.9);
         text-decoration: none;
         font-size: 0.85rem;
         font-weight: 700;
         letter-spacing: 0.04em;
         padding: 0.4rem 0.85rem;
         border-radius: 9999px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(237,229,208,0.2);
         transition: background 0.15s, color 0.15s;
       }
       .topbar-back:hover {
-        background: rgba(255,255,255,0.12);
+        background: rgba(237,229,208,0.1);
         color: #fff;
       }
       .topbar-title {
         font-size: 0.8rem;
-        color: rgba(255,255,255,0.5);
+        color: rgba(237,229,208,0.45);
         font-weight: 500;
         white-space: nowrap;
         overflow: hidden;
@@ -82,7 +85,7 @@
         gap: 0.5rem;
       }
       .topbar-nav a {
-        color: rgba(255,255,255,0.6);
+        color: rgba(237,229,208,0.55);
         font-size: 0.78rem;
         font-weight: 600;
         text-decoration: none;
@@ -91,11 +94,11 @@
         transition: background 0.15s, color 0.15s;
       }
       .topbar-nav a:hover {
-        background: rgba(255,255,255,0.1);
-        color: #fff;
+        background: rgba(237,229,208,0.1);
+        color: rgba(237,229,208,0.9);
       }
       .topbar-nav a.disabled {
-        opacity: 0.3;
+        opacity: 0.25;
         pointer-events: none;
       }
 
@@ -104,7 +107,7 @@
         width: 100%;
         max-height: 420px;
         overflow: hidden;
-        background: linear-gradient(135deg, #2a3a5c 0%, #1a2744 100%);
+        background: linear-gradient(135deg, #243550 0%, #1C2B3A 100%);
       }
       .hero-image-wrap img {
         width: 100%;
@@ -112,17 +115,7 @@
         max-height: 420px;
         object-fit: cover;
         display: block;
-        opacity: 0.9;
-      }
-      .hero-image-placeholder {
-        width: 100%;
-        height: 260px;
-        background: linear-gradient(135deg, #1a2744 0%, #2e4080 60%, #1a2744 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 4rem;
-        opacity: 0.6;
+        opacity: 0.92;
       }
 
       /* ── Article container ── */
@@ -136,28 +129,28 @@
       .topic-tag {
         display: inline-block;
         background: var(--navy);
-        color: #fff;
-        font-size: 0.65rem;
+        color: rgba(237,229,208,0.92);
+        font-size: 0.62rem;
         font-weight: 700;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        padding: 0.3rem 0.8rem;
+        padding: 0.28rem 0.8rem;
         border-radius: 9999px;
       }
 
       /* ── Long summary ── */
       .long-summary p {
         font-size: 1.1rem;
-        line-height: 1.85;
+        line-height: 1.88;
         color: var(--ink-mid);
-        margin-bottom: 1.4rem;
+        margin-bottom: 1.5rem;
       }
       .long-summary p:last-child { margin-bottom: 0; }
 
       /* ── Personal impact box ── */
       .impact-box {
         background: var(--impact-bg);
-        border: 1px solid #c5d5f8;
+        border: 1px solid #C5D5F5;
         border-right: 4px solid var(--impact-border);
         border-radius: 1rem;
         padding: 1.25rem 1.35rem;
@@ -179,24 +172,24 @@
         flex-shrink: 0;
       }
       .impact-label {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         font-weight: 800;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--impact-border);
       }
       .impact-text {
         font-size: 1rem;
-        line-height: 1.7;
+        line-height: 1.72;
         color: #1e3a8a;
         font-weight: 400;
       }
 
       /* ── Section heading ── */
       .section-heading {
-        font-size: 0.72rem;
+        font-size: 0.68rem;
         font-weight: 800;
-        letter-spacing: 0.25em;
+        letter-spacing: 0.28em;
         text-transform: uppercase;
         color: var(--muted);
         margin-bottom: 1rem;
@@ -208,13 +201,13 @@
         content: '';
         flex: 1;
         height: 1px;
-        background: var(--border);
+        background: var(--divider);
       }
 
       /* ── Divider ── */
       .article-divider {
         border: none;
-        border-top: 1px solid var(--border);
+        border-top: 1px solid var(--divider);
         margin: 2rem 0;
       }
 
@@ -224,7 +217,7 @@
         align-items: center;
         gap: 0.6rem;
         background: var(--navy);
-        color: #fff;
+        color: rgba(237,229,208,0.95);
         font-size: 0.9rem;
         font-weight: 700;
         text-decoration: none;
@@ -240,12 +233,12 @@
 
       /* ── Personal note ── */
       .personal-note {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         color: var(--muted);
         font-style: italic;
-        line-height: 1.65;
+        line-height: 1.68;
         padding: 1rem 0;
-        border-top: 1px dashed #ddd8cf;
+        border-top: 1px dashed var(--divider);
       }
 
       /* ── Progress bar ── */
@@ -254,7 +247,7 @@
         top: 54px;
         right: 0;
         height: 3px;
-        background: var(--gold);
+        background: var(--bronze);
         width: 0%;
         transition: width 0.1s linear;
         z-index: 99;
@@ -295,17 +288,14 @@
     </nav>
 
     <!-- ═══ HERO IMAGE ═══ -->
-    {% if article.image %}
     <div class="hero-image-wrap">
       <img
-        src="{{ article.image }}"
+        src="{{ article.image or 'https://source.unsplash.com/featured/800x500/?news,journalism' }}"
         alt="{{ article.title }}"
-        onerror="this.parentElement.classList.add('hero-image-placeholder'); this.parentElement.innerHTML='📰'; this.remove()"
+        style="width:100%; max-height:420px; object-fit:cover; display:block;"
+        onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=420&fit=crop&q=80'"
       />
     </div>
-    {% else %}
-    <div class="hero-image-placeholder">📰</div>
-    {% endif %}
 
     <!-- ═══ ARTICLE BODY ═══ -->
     <div class="article-container">
@@ -325,11 +315,11 @@
 
       <!-- Source + Country metadata line -->
       {% if article.source_name or article.country_origin %}
-      <p class="text-sm text-gray-500" style="margin-bottom:1.75rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+      <p style="font-size:0.82rem; color:var(--muted); margin-bottom:1.75rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
         {% if article.source_name %}
         <span style="display:inline-flex; align-items:center; gap:0.35rem;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          מקור: <strong style="font-weight:600; color:#4b5563;">{{ article.source_name }}</strong>
+          מקור: <strong style="font-weight:600; color:var(--ink-mid);">{{ article.source_name }}</strong>
         </span>
         {% endif %}
         {% if article.source_name and article.country_origin %}
@@ -338,7 +328,7 @@
         {% if article.country_origin %}
         <span style="display:inline-flex; align-items:center; gap:0.35rem;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          מדינה: <strong style="font-weight:600; color:#4b5563;">{{ article.country_origin }}</strong>
+          מדינה: <strong style="font-weight:600; color:var(--ink-mid);">{{ article.country_origin }}</strong>
         </span>
         {% endif %}
       </p>
@@ -378,7 +368,7 @@
       <!-- ── Bottom Actions ── -->
       <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
         <!-- Back button (prominent) -->
-        <a href="/" style="display:inline-flex; align-items:center; gap:0.5rem; background:#f3f4f6; color:var(--navy); font-size:0.88rem; font-weight:700; padding:0.75rem 1.4rem; border-radius:9999px; text-decoration:none; border:1px solid #e5e7eb; transition:background 0.15s;" onmouseover="this.style.background='#e5e7eb'" onmouseout="this.style.background='#f3f4f6'">
+        <a href="/" style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--card-bg); color:var(--navy); font-size:0.88rem; font-weight:700; padding:0.75rem 1.4rem; border-radius:9999px; text-decoration:none; border:1px solid var(--card-border); transition:background 0.15s;" onmouseover="this.style.background='#EDE9DF'" onmouseout="this.style.background='var(--card-bg)'"  >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           חזרה לעיתון
         </a>
@@ -395,7 +385,7 @@
     </div>
 
     <!-- ═══ FOOTER ═══ -->
-    <footer style="background:var(--navy); color:rgba(255,255,255,0.4); text-align:center; padding:1.5rem 1rem; font-size:0.75rem; letter-spacing:0.1em; margin-top:3rem;">
+    <footer style="background:linear-gradient(160deg,#1C2B3A 0%,#162236 100%); color:rgba(237,229,208,0.38); text-align:center; padding:1.75rem 1rem; font-size:0.72rem; letter-spacing:0.15em; margin-top:3rem; border-top:1px solid rgba(232,228,216,0.08);">
       עיתון אישי &bull; נוצר באמצעות AI &bull; לשימוש אישי בלבד
     </footer>
 
