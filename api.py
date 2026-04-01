@@ -42,6 +42,7 @@ def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List
     for idx, article in enumerate(newspaper_data.get("articles", [])):
         source = selected_articles[idx] if idx < len(selected_articles) else {}
         item = dict(article)
+        item["id"] = idx
         # New Tavily flow: url/image already embedded; old NewsAPI flow: fall back to source
         item["url"] = item.get("url") or source.get("url", "")
         item["image"] = item.get("image") or source.get("image", "")
@@ -52,6 +53,9 @@ def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List
         if "bullets" not in item:
             summary = item.get("summary") or item.get("details") or ""
             item["bullets"] = [summary] if summary else []
+        # Ensure long_summary and personal_impact exist (may be absent in old cache)
+        item.setdefault("long_summary", "")
+        item.setdefault("personal_impact", "")
         enriched.append(item)
     return enriched
 
@@ -66,6 +70,27 @@ async def update_news(request: Request, api_key: str = Query(None)):
     CACHE_FILE.write_text(json.dumps(body, ensure_ascii=False, indent=2), encoding="utf-8")
     print("[update-news] Cache updated successfully.")
     return JSONResponse({"status": "ok"})
+
+
+@app.get("/article/{article_id}", response_class=HTMLResponse)
+def article_page(request: Request, article_id: int):
+    result = load_cached_newspaper()
+    if not result:
+        raise HTTPException(status_code=404, detail="No newspaper data available")
+    newspaper_data, selected_articles = result
+    articles = enrich_articles(newspaper_data, selected_articles)
+    if article_id < 0 or article_id >= len(articles):
+        raise HTTPException(status_code=404, detail="Article not found")
+    return templates.TemplateResponse(
+        request=request,
+        name="article.html",
+        context={
+            "article": articles[article_id],
+            "newspaper_title": newspaper_data.get("title", "העיתון האישי"),
+            "article_id": article_id,
+            "total_articles": len(articles),
+        },
+    )
 
 
 @app.get("/", response_class=HTMLResponse)

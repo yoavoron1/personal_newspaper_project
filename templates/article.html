@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ article.title }} — {{ newspaper_title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Assistant:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #1a2744;
+        --navy-mid: #243460;
+        --gold: #b8962e;
+        --gold-light: #f5e9c4;
+        --gold-bg: #fffbf0;
+        --cream: #f7f3ec;
+        --ink: #1e1e1e;
+        --ink-mid: #374151;
+        --muted: #6b7280;
+        --border: #e8e2d9;
+        --impact-bg: #eef4ff;
+        --impact-border: #3b5bdb;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        font-family: "Heebo", "Assistant", system-ui, sans-serif;
+        background-color: var(--cream);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── Top nav bar ── */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--navy);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.25rem;
+        height: 54px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      }
+      .topbar-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 0.4rem 0.85rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255,255,255,0.2);
+        transition: background 0.15s, color 0.15s;
+      }
+      .topbar-back:hover {
+        background: rgba(255,255,255,0.12);
+        color: #fff;
+      }
+      .topbar-title {
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.5);
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 240px;
+      }
+      .topbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .topbar-nav a {
+        color: rgba(255,255,255,0.6);
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        transition: background 0.15s, color 0.15s;
+      }
+      .topbar-nav a:hover {
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+      }
+      .topbar-nav a.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      /* ── Hero banner ── */
+      .hero-image-wrap {
+        width: 100%;
+        max-height: 420px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #2a3a5c 0%, #1a2744 100%);
+      }
+      .hero-image-wrap img {
+        width: 100%;
+        height: 100%;
+        max-height: 420px;
+        object-fit: cover;
+        display: block;
+        opacity: 0.9;
+      }
+      .hero-image-placeholder {
+        width: 100%;
+        height: 260px;
+        background: linear-gradient(135deg, #1a2744 0%, #2e4080 60%, #1a2744 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        opacity: 0.6;
+      }
+
+      /* ── Article container ── */
+      .article-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 1.25rem 5rem;
+      }
+
+      /* ── Topic tag ── */
+      .topic-tag {
+        display: inline-block;
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.8rem;
+        border-radius: 9999px;
+      }
+
+      /* ── Bullets ── */
+      .bullet-list { list-style: none; padding: 0; margin: 0; }
+      .bullet-list li {
+        display: flex;
+        gap: 0.7rem;
+        align-items: flex-start;
+        padding: 0.55rem 0;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: var(--ink-mid);
+        border-bottom: 1px solid #ede8df;
+      }
+      .bullet-list li:last-child { border-bottom: none; }
+      .bullet-dot {
+        flex-shrink: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        margin-top: 0.52rem;
+      }
+
+      /* ── Why it matters box ── */
+      .why-box {
+        background: var(--gold-bg);
+        border-right: 4px solid var(--gold);
+        border-radius: 0.75rem;
+        padding: 1rem 1.1rem;
+      }
+      .why-label {
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.35rem;
+      }
+      .why-text {
+        font-size: 1rem;
+        color: #4b3d1a;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      /* ── Long summary ── */
+      .long-summary p {
+        font-size: 1.1rem;
+        line-height: 1.85;
+        color: var(--ink-mid);
+        margin-bottom: 1.4rem;
+      }
+      .long-summary p:last-child { margin-bottom: 0; }
+
+      /* ── Personal impact box ── */
+      .impact-box {
+        background: var(--impact-bg);
+        border: 1px solid #c5d5f8;
+        border-right: 4px solid var(--impact-border);
+        border-radius: 1rem;
+        padding: 1.25rem 1.35rem;
+      }
+      .impact-header {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        margin-bottom: 0.75rem;
+      }
+      .impact-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--impact-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .impact-label {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--impact-border);
+      }
+      .impact-text {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #1e3a8a;
+        font-weight: 400;
+      }
+
+      /* ── Section heading ── */
+      .section-heading {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+      }
+      .section-heading::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ── Divider ── */
+      .article-divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 2rem 0;
+      }
+
+      /* ── Source button ── */
+      .source-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 0.85rem 1.75rem;
+        border-radius: 9999px;
+        transition: background 0.15s, transform 0.15s;
+        letter-spacing: 0.03em;
+      }
+      .source-btn:hover {
+        background: var(--navy-mid);
+        transform: translateY(-1px);
+      }
+
+      /* ── Personal note ── */
+      .personal-note {
+        font-size: 0.95rem;
+        color: var(--muted);
+        font-style: italic;
+        line-height: 1.65;
+        padding: 1rem 0;
+        border-top: 1px dashed #ddd8cf;
+      }
+
+      /* ── Progress bar ── */
+      #reading-progress {
+        position: fixed;
+        top: 54px;
+        right: 0;
+        height: 3px;
+        background: var(--gold);
+        width: 0%;
+        transition: width 0.1s linear;
+        z-index: 99;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Reading progress bar -->
+    <div id="reading-progress"></div>
+
+    <!-- ═══ TOP NAV BAR ═══ -->
+    <nav class="topbar">
+      <a href="/" class="topbar-back" aria-label="חזרה לדף הבית">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        חזרה לעיתון
+      </a>
+
+      <span class="topbar-title">{{ newspaper_title }}</span>
+
+      <div class="topbar-nav">
+        {% if article_id > 0 %}
+        <a href="/article/{{ article_id - 1 }}" aria-label="כתבה קודמת">
+          ← קודמת
+        </a>
+        {% else %}
+        <a class="disabled">← קודמת</a>
+        {% endif %}
+
+        {% if article_id < total_articles - 1 %}
+        <a href="/article/{{ article_id + 1 }}" aria-label="כתבה הבאה">
+          הבאה →
+        </a>
+        {% else %}
+        <a class="disabled">הבאה →</a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- ═══ HERO IMAGE ═══ -->
+    {% if article.image %}
+    <div class="hero-image-wrap">
+      <img
+        src="{{ article.image }}"
+        alt="{{ article.title }}"
+        onerror="this.parentElement.classList.add('hero-image-placeholder'); this.parentElement.innerHTML='📰'; this.remove()"
+      />
+    </div>
+    {% else %}
+    <div class="hero-image-placeholder">📰</div>
+    {% endif %}
+
+    <!-- ═══ ARTICLE BODY ═══ -->
+    <div class="article-container">
+
+      <!-- Meta row -->
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-top:2rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+        {% if article.topic %}
+        <span class="topic-tag">{{ article.topic }}</span>
+        {% endif %}
+        <span style="font-size:0.78rem; color:var(--muted);">ניתוח מעמיק</span>
+        <span style="font-size:0.78rem; color:var(--border);">•</span>
+        <span style="font-size:0.78rem; color:var(--muted);">כתבה {{ article_id + 1 }} מתוך {{ total_articles }}</span>
+      </div>
+
+      <!-- Title -->
+      <h1 style="font-size:clamp(1.7rem,5vw,2.5rem); font-weight:900; color:var(--navy); line-height:1.2; margin-bottom:1.5rem; letter-spacing:-0.02em;">
+        {{ article.title }}
+      </h1>
+
+      <!-- ── Section: Quick Bullets ── -->
+      {% if article.bullets and article.bullets|length > 0 %}
+      <div style="margin-bottom:1.75rem;">
+        <p class="section-heading">נקודות עיקריות</p>
+        <ul class="bullet-list">
+          {% for bullet in article.bullets %}
+          <li>
+            <span class="bullet-dot"></span>
+            <span>{{ bullet }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- ── Why it matters ── -->
+      {% if article.why_it_matters %}
+      <div class="why-box" style="margin-bottom:1.75rem;">
+        <p class="why-label">למה זה חשוב</p>
+        <p class="why-text">{{ article.why_it_matters }}</p>
+      </div>
+      {% endif %}
+
+      <hr class="article-divider" />
+
+      <!-- ── Long Summary: Deep Analysis ── -->
+      {% if article.long_summary %}
+      <div style="margin-bottom:2rem;">
+        <p class="section-heading">ניתוח מעמיק</p>
+        <div class="long-summary">
+          {% for paragraph in article.long_summary.split('\n\n') %}
+          {% if paragraph.strip() %}
+          <p>{{ paragraph.strip() }}</p>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- ── Personal Impact ── -->
+      {% if article.personal_impact %}
+      <div class="impact-box" style="margin-bottom:2rem;">
+        <div class="impact-header">
+          <div class="impact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <span class="impact-label">השפעה אישית</span>
+        </div>
+        <p class="impact-text">{{ article.personal_impact }}</p>
+      </div>
+      {% endif %}
+
+      <!-- ── Personal Note ── -->
+      {% set note = article.personal_note or article.commentary %}
+      {% if note %}
+      <p class="personal-note">{{ note }}</p>
+      {% endif %}
+
+      <hr class="article-divider" />
+
+      <!-- ── Source Button ── -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        {% if article.url %}
+        <a href="{{ article.url }}" target="_blank" rel="noopener" class="source-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          קרא את הכתבה המלאה במקור
+        </a>
+        {% endif %}
+        <a href="/" style="font-size:0.85rem; font-weight:700; color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          חזרה לעיתון
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer style="background:var(--navy); color:rgba(255,255,255,0.4); text-align:center; padding:1.5rem 1rem; font-size:0.75rem; letter-spacing:0.1em; margin-top:3rem;">
+      עיתון אישי &bull; נוצר באמצעות AI &bull; לשימוש אישי בלבד
+    </footer>
+
+    <script>
+      // Reading progress bar
+      const bar = document.getElementById('reading-progress');
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+    </script>
+  </body>
+</html>
