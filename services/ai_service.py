@@ -269,8 +269,8 @@ class AIService:
       "why_it_matters": "למה זה חשוב — משפט אחד עד שניים, ממוקד ובעל ערך אמיתי.",
       "personal_note": "הערה אישית רלוונטית למשתמש הספציפי, תוך התחשבות בגיל, תחומי עניין ורקע.",
       "long_summary": "פסקה ראשונה — הקשר ורקע: הצב את האירוע בהקשרו הרחב. מה השתנה, מדוע זה חשוב עכשיו, ומהי המשמעות ההיסטורית, המדעית או התרבותית (3-4 משפטים).\\n\\nפסקה שנייה — פרטים ונתונים: פרט את הממצאים הטכניים, הנתונים הכמותיים, שמות הגופים המעורבים, ומה בדיוק הוכח, הוכרז או התרחש (3-4 משפטים). היה מדויק ועמוק — הקורא אינו מסתפק בשטחיות.\\n\\nפסקה שלישית — השלכות ועתיד: לאן זה מוביל, מה עשוי להשתנות, ומה הזווית הביקורתית שמי שמעמיק בתחום זה חייב להכיר (3-4 משפטים). אל תחזור על תוכן short_summary או why_it_matters.",
-      "personal_impact": "השפעה אישית: נתח כיצד חדשות זו קשורה ספציפית ל{user_name} — {family_info_input.strip()}. כתוב 2-3 משפטים בעברית גבוהה, המחברים את הנושא לתחומי ענין שלו (טניס, מוזיקה, אופנה, פרנסס טיאפו) ולקהילת הקרובים לו.",
-      "image_keywords": "three descriptive English words capturing the visual essence of this story (e.g. 'tennis player court' or 'fashion runway model')",
+      "personal_impact": "השפעה אישית: נתח כיצד חדשות זו קשורה ספציפית ל{user_name} — {family_info_input.strip()}. כתוב 2-3 משפטים בעברית מעמיקה ואקדמית, המחברים את הנושא לתחומי העניין שלה (מוזיקה חדשה, הופעות, טיולים בארץ, ספרות, שוק ההון).",
+      "image_keywords": "three descriptive English words capturing the visual essence of this story (e.g. 'music concert crowd' or 'hiking trail nature')",
       "source_id": 3
     }}
   ]

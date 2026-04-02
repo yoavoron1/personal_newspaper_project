@@ -13,18 +13,18 @@
     />
     <style>
       :root {
-        --navy:          #1C2B3A;
-        --navy-mid:      #243550;
+        --navy:          #1A202C;
+        --navy-mid:      #2D3748;
         --bronze:        #9C7A3C;
         --bronze-light:  #EDE5D0;
-        --bronze-bg:     #F7F3E8;
-        --page-bg:       #FDFBF7;
-        --card-bg:       #F5F2EA;
-        --card-border:   #E8E4D8;
-        --ink:           #1A1A1A;
+        --bronze-bg:     #EDF2F7;
+        --page-bg:       #F4F5F7;
+        --card-bg:       #FFFFFF;
+        --card-border:   #E2E8F0;
+        --ink:           #1A202C;
         --ink-mid:       #3D3830;
         --muted:         #7C7268;
-        --divider:       #D4CEBC;
+        --divider:       #E2E8F0;
       }
 
       * { box-sizing: border-box; }
@@ -32,6 +32,8 @@
       body {
         font-family: "Heebo", "Assistant", system-ui, sans-serif;
         background-color: var(--page-bg);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='3' cy='3' r='0.75' fill='%23000' fill-opacity='0.06'/%3E%3C/svg%3E");
+        background-size: 6px 6px;
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
       }
@@ -125,8 +127,8 @@
         transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
       }
       .article-card:hover {
-        border-color: #D4CEBC;
-        box-shadow: 0 6px 24px rgba(28,43,58,0.09);
+        border-color: #CBD5E0;
+        box-shadow: 0 6px 24px rgba(26,32,44,0.09);
         transform: translateY(-2px);
       }
 
@@ -169,7 +171,7 @@
       /* Why it matters */
       .why-box {
         background: var(--bronze-bg);
-        border-right: 3px solid var(--bronze);
+        border-right: 3px solid #64748B;
         border-radius: 0.75rem;
         padding: 0.85rem 1rem;
         margin-top: 1rem;
@@ -179,7 +181,7 @@
         font-weight: 800;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: var(--bronze);
+        color: #64748B;
         margin-bottom: 0.3rem;
       }
       .why-text {
@@ -221,9 +223,9 @@
       /* Clickable card */
       .card-link { cursor: pointer; }
       .card-link:hover {
-        box-shadow: 0 8px 28px rgba(28,43,58,0.11);
+        box-shadow: 0 8px 28px rgba(26,32,44,0.11);
         transform: translateY(-3px);
-        border-color: #C8C2B0;
+        border-color: #CBD5E0;
       }
       .card-link:focus-visible {
         outline: 2px solid var(--bronze);

@@ -13,20 +13,20 @@
     />
     <style>
       :root {
-        --navy:          #1C2B3A;
-        --navy-mid:      #243550;
+        --navy:          #1A202C;
+        --navy-mid:      #2D3748;
         --bronze:        #9C7A3C;
         --bronze-light:  #EDE5D0;
-        --bronze-bg:     #F7F3E8;
-        --page-bg:       #FDFBF7;
-        --card-bg:       #F5F2EA;
-        --card-border:   #E8E4D8;
-        --ink:           #1A1A1A;
+        --bronze-bg:     #EDF2F7;
+        --page-bg:       #F4F5F7;
+        --card-bg:       #FFFFFF;
+        --card-border:   #E2E8F0;
+        --ink:           #1A202C;
         --ink-mid:       #3D3830;
         --muted:         #7C7268;
-        --divider:       #D4CEBC;
-        --impact-bg:     #EAF0FA;
-        --impact-border: #3B5BDB;
+        --divider:       #E2E8F0;
+        --impact-bg:     #EDF2F7;
+        --impact-border: #64748B;
       }
 
       * { box-sizing: border-box; }
@@ -34,6 +34,8 @@
       body {
         font-family: "Heebo", "Assistant", system-ui, sans-serif;
         background-color: var(--page-bg);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='3' cy='3' r='0.75' fill='%23000' fill-opacity='0.06'/%3E%3C/svg%3E");
+        background-size: 6px 6px;
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
       }
@@ -150,7 +152,7 @@
       /* ── Personal impact box ── */
       .impact-box {
         background: var(--impact-bg);
-        border: 1px solid #C5D5F5;
+        border: 1px solid #CBD5E0;
         border-right: 4px solid var(--impact-border);
         border-radius: 1rem;
         padding: 1.25rem 1.35rem;
@@ -181,7 +183,7 @@
       .impact-text {
         font-size: 1rem;
         line-height: 1.72;
-        color: #1e3a8a;
+        color: #374151;
         font-weight: 400;
       }
 
@@ -368,7 +370,7 @@
       <!-- ── Bottom Actions ── -->
       <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between;">
         <!-- Back button (prominent) -->
-        <a href="/" style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--card-bg); color:var(--navy); font-size:0.88rem; font-weight:700; padding:0.75rem 1.4rem; border-radius:9999px; text-decoration:none; border:1px solid var(--card-border); transition:background 0.15s;" onmouseover="this.style.background='#EDE9DF'" onmouseout="this.style.background='var(--card-bg)'"  >
+        <a href="/" style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--card-bg); color:var(--navy); font-size:0.88rem; font-weight:700; padding:0.75rem 1.4rem; border-radius:9999px; text-decoration:none; border:1px solid var(--card-border); transition:background 0.15s;" onmouseover="this.style.background='#EDF2F7'" onmouseout="this.style.background='var(--card-bg)'"  >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           חזרה לעיתון
         </a>
