@@ -16,15 +16,17 @@
         --navy:          #1A202C;
         --navy-mid:      #2D3748;
         --bronze:        #9C7A3C;
+        --champagne:     #D4CBB3;
         --bronze-light:  #EDE5D0;
         --bronze-bg:     #EDF2F7;
-        --page-bg:       #F4F5F7;
+        --page-bg:       #F8F9FA;
         --card-bg:       #FFFFFF;
         --card-border:   #E2E8F0;
         --ink:           #1A202C;
         --ink-mid:       #3D3830;
         --muted:         #7C7268;
         --divider:       #E2E8F0;
+        --slate:         #64748B;
       }
 
       * { box-sizing: border-box; }
@@ -32,41 +34,56 @@
       body {
         font-family: "Heebo", "Assistant", system-ui, sans-serif;
         background-color: var(--page-bg);
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='3' cy='3' r='0.75' fill='%23000' fill-opacity='0.06'/%3E%3C/svg%3E");
-        background-size: 6px 6px;
         color: var(--ink);
         -webkit-font-smoothing: antialiased;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: url('/static/images/bg.jpg') center center / cover no-repeat;
+        opacity: 0.07;
+        z-index: -1;
+        pointer-events: none;
       }
 
       /* Masthead */
       .masthead {
-        background: linear-gradient(160deg, #1C2B3A 0%, #162236 60%, #1A2744 100%);
+        background: radial-gradient(ellipse 90% 130% at 50% 40%, #2C3A50 0%, #162236 45%, #111827 100%);
         color: #fff;
         padding: 2.25rem 1.5rem 1.75rem;
         text-align: center;
         position: relative;
         overflow: hidden;
-        border-bottom: 1px solid rgba(232,228,216,0.12);
+        border-bottom: 1px solid rgba(232,228,216,0.10);
       }
+      /* Pearl/cream spotlight — centered, spreading softly outward */
       .masthead::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at 50% -10%, rgba(156,122,60,0.22) 0%, transparent 65%);
+        background:
+          radial-gradient(ellipse 65% 80% at 50% 38%,
+            rgba(255,253,245,0.26) 0%,
+            rgba(255,251,237,0.10) 42%,
+            transparent 72%);
         pointer-events: none;
       }
+      /* Champagne accent line at the bottom */
       .masthead::after {
         content: '';
         position: absolute;
         bottom: 0; left: 0; right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, rgba(156,122,60,0.6) 40%, rgba(156,122,60,0.6) 60%, transparent);
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(212,203,179,0.50) 35%, rgba(212,203,179,0.50) 65%, transparent);
       }
       .masthead-eyebrow {
         font-size: 0.65rem;
         letter-spacing: 0.35em;
         text-transform: uppercase;
-        color: rgba(237,229,208,0.6);
+        color: rgba(203,213,225,0.50);
         margin-bottom: 0.6rem;
       }
       .masthead-title {
@@ -79,14 +96,14 @@
       .masthead-rule {
         width: 3rem;
         height: 2px;
-        background: var(--bronze);
+        background: var(--champagne);
         margin: 1rem auto 0.8rem;
         border-radius: 9999px;
         opacity: 0.85;
       }
       .masthead-intro {
         font-size: 1rem;
-        color: rgba(237,229,208,0.75);
+        color: rgba(209,213,219,0.65);
         max-width: 540px;
         margin: 0 auto;
         font-weight: 400;
@@ -216,7 +233,7 @@
         position: relative;
         z-index: 1;
       }
-      .read-more:hover { color: var(--bronze); }
+      .read-more:hover { color: var(--slate); }
       .read-more svg { transition: transform 0.15s; }
       .read-more:hover svg { transform: translateX(-3px); }
 
@@ -438,7 +455,7 @@
             {% endif %}
 
             <div style="display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:1rem; position:relative; z-index:1;">
-              <span style="font-size:0.75rem; font-weight:700; color:var(--bronze); letter-spacing:0.04em;">לחץ לקריאה מלאה ←</span>
+              <span style="font-size:0.75rem; font-weight:700; color:var(--slate); letter-spacing:0.04em;">לחץ לקריאה מלאה ←</span>
               {% if article.url %}
               <a
                 href="{{ article.url }}"
