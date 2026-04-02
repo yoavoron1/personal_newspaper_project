@@ -44,7 +44,7 @@
         position: fixed;
         inset: 0;
         background: url('/static/images/bg.jpg') center center / cover no-repeat;
-        opacity: 0.07;
+        opacity: 0.15;
         z-index: -1;
         pointer-events: none;
       }
@@ -59,16 +59,16 @@
         overflow: hidden;
         border-bottom: 1px solid rgba(232,228,216,0.10);
       }
-      /* Pearl/cream spotlight — centered, spreading softly outward */
+      /* Pearl/cream spotlight — tight central glow, fades quickly */
       .masthead::before {
         content: '';
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(ellipse 65% 80% at 50% 38%,
-            rgba(255,253,245,0.26) 0%,
-            rgba(255,251,237,0.10) 42%,
-            transparent 72%);
+          radial-gradient(ellipse 55% 65% at 50% 38%,
+            rgba(255,253,245,0.13) 0%,
+            rgba(255,251,237,0.04) 40%,
+            transparent 68%);
         pointer-events: none;
       }
       /* Champagne accent line at the bottom */
@@ -400,7 +400,7 @@
         <span class="line"></span>
       </div>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr)); gap:1.25rem;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr)); gap:1.25rem;">
         {% for article in articles[1:] %}
         <article
           class="article-card card-link"

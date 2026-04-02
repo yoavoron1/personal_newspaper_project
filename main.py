@@ -117,7 +117,7 @@ def create_newspaper_data() -> Optional[Tuple[Dict, List[Dict]]]:
     tavily_results = fetch_articles_with_tavily(
         topics=TAVILY_TOPICS,
         tavily_api_key=settings.tavily_api_key,
-        max_results_per_topic=5,
+        max_results_per_topic=8,
     )
 
     if not tavily_results:

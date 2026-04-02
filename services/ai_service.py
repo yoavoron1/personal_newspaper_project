@@ -165,7 +165,7 @@ class AIService:
         user_text_input: str,
         family_info_input: str,
         articles: List[Dict],
-        top_n: int = 4,
+        top_n: int = 8,
     ) -> List[Dict]:
         """מדורג ובוחר את הכתבות המתאימות ביותר למשתמש."""
         if not articles:
@@ -190,7 +190,7 @@ class AIService:
 
         Return JSON:
         {{
-          "selected_indices": [1, 2, 3, 4]
+          "selected_indices": [1, 2, 3, 4, 5, 6, 7, 8]
         }}
 
         Articles:
@@ -254,7 +254,7 @@ class AIService:
 
 תפקידך:
 1. סנן clickbait, פרסומות וחדשות שוליות ללא ערך אמיתי
-2. בחר 4-5 כתבות בעלות הערך הגבוה ביותר, שמותאמות לפרופיל המשתמש
+2. בחר 7-8 כתבות בעלות הערך הגבוה ביותר, שמותאמות לפרופיל המשתמש — גיוון בין הנושאים
 3. כתוב שתי רמות תוכן בעברית לכל כתבה: תקציר קצר לדף הבית וניתוח מעמיק לדף הכתבה
 
 החזר JSON בפורמט הבא בלבד:
@@ -298,7 +298,7 @@ class AIService:
                 model="gpt-4o",
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
-                max_tokens=8000,
+                max_tokens=14000,
             )
             newspaper_data = json.loads(response.choices[0].message.content)
         except Exception as exc:
