@@ -15,11 +15,10 @@ def _unsplash_url(article: Dict) -> str:
     """בונה URL לתמונה מ-Unsplash לפי מילות המפתח שה-AI סיפק."""
     raw = (article.get("image_keywords") or "").strip()
     if not raw:
-        # Fall back to topic if no keywords
-        raw = (article.get("topic") or "news journalism").strip()
+        raw = (article.get("topic") or "news world").strip()
     words = [w.strip(".,;:") for w in raw.split() if w.strip()][:4]
     slug = quote(",".join(words), safe=",")
-    return f"https://source.unsplash.com/featured/800x500/?{slug}"
+    return f"https://source.unsplash.com/featured/800x600/?{slug}"
 
 
 class AIService:
@@ -227,6 +226,69 @@ class AIService:
 
         return selected[:top_n]
 
+    def _select_article_indices(
+        self,
+        user_text_input: str,
+        tavily_results: List[Dict],
+        target_count: int = 8,
+    ) -> List[int]:
+        """Phase 1 (GPT-4o-mini): pick the best article 1-based indices with topic diversity."""
+        lines = []
+        for i, r in enumerate(tavily_results, start=1):
+            lines.append(
+                f"[{i}] TOPIC: {r['topic']} | "
+                f"SOURCE: {r.get('source_name', '')} | "
+                f"TITLE: {r['title']} | "
+                f"SNIPPET: {r['content'][:150]}"
+            )
+
+        prompt = f"""You are a Chief Editor for a personalised Hebrew digital newspaper.
+
+User interests: {user_text_input}
+
+Below is a numbered list of {len(tavily_results)} candidate articles.
+Select exactly {target_count} articles that are:
+- Most interesting and relevant to the user's interests
+- Diverse in topic (at most 2 articles per topic bucket)
+- High journalistic quality (no clickbait, ads, or listicle filler)
+
+Return ONLY valid JSON:
+{{"selected_indices": [1, 2, 3, 4, 5, 6, 7, 8]}}
+
+Candidates:
+{chr(10).join(lines)}"""
+
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                response_format={"type": "json_object"},
+                max_tokens=120,
+            )
+            data = safe_json_loads(response.choices[0].message.content)
+            indices = data.get("selected_indices", []) if data else []
+            valid = [
+                int(i) for i in indices
+                if isinstance(i, (int, float)) and 1 <= int(i) <= len(tavily_results)
+            ]
+            print(f"  Editorial selection → {valid}")
+            if len(valid) >= target_count:
+                return valid[:target_count]
+        except Exception as exc:
+            print(f"\n[WARN] Editorial selection failed ({exc}), using all results.")
+
+        # Fallback: round-robin across topics to guarantee diversity
+        seen_topics: dict = {}
+        fallback: List[int] = []
+        for i, r in enumerate(tavily_results, start=1):
+            t = r.get("topic", "")
+            seen_topics[t] = seen_topics.get(t, 0) + 1
+            if seen_topics[t] <= 2:
+                fallback.append(i)
+            if len(fallback) >= target_count:
+                break
+        return fallback[:target_count]
+
     def write_newspaper_from_tavily(
         self,
         user_name: str,
@@ -234,13 +296,23 @@ class AIService:
         family_info_input: str,
         writing_style_input: str,
         tavily_results: List[Dict],
+        target_articles: int = 8,
     ) -> Optional[Dict]:
-        """כותב עיתון אישי מתוצאות Tavily בפורמט חדש עם bullet points ו'למה זה חשוב'."""
+        """Two-phase pipeline: editorial selection (GPT-4o-mini) → writing (GPT-4o)."""
         if not tavily_results:
             return None
 
+        # ── Phase 1: cheap editorial selection ──────────────────────────────
+        print(f"  Phase 1 — editorial selection from {len(tavily_results)} candidates…")
+        selected_indices = self._select_article_indices(
+            user_text_input, tavily_results, target_count=target_articles
+        )
+        selected_pool = [tavily_results[i - 1] for i in selected_indices]
+        print(f"  Phase 2 — writing full content for {len(selected_pool)} articles…")
+
+        # ── Phase 2: focused writing for selected articles only ──────────────
         context_lines = []
-        for i, r in enumerate(tavily_results, start=1):
+        for i, r in enumerate(selected_pool, start=1):
             context_lines.append(
                 f"[{i}] TOPIC: {r['topic']}\n"
                 f"    SOURCE: {r.get('source_name', '')} ({r.get('country_origin', '')})\n"
@@ -250,14 +322,11 @@ class AIService:
             )
 
         prompt = f"""
-אתה עורך עיתון דיגיטלי אישי בעברית. קיבלת תוצאות חיפוש עדכניות מהאינטרנט.
+אתה עורך עיתון דיגיטלי אישי בעברית. קיבלת {len(selected_pool)} כתבות שנבחרו עבורך לכתיבה.
 
-תפקידך:
-1. סנן clickbait, פרסומות וחדשות שוליות ללא ערך אמיתי
-2. בחר 7-8 כתבות בעלות הערך הגבוה ביותר, שמותאמות לפרופיל המשתמש — גיוון בין הנושאים
-3. כתוב שתי רמות תוכן בעברית לכל כתבה: תקציר קצר לדף הבית וניתוח מעמיק לדף הכתבה
+תפקידך: כתוב שתי רמות תוכן בעברית לכל אחת מ-{len(selected_pool)} הכתבות — תקציר קצר לדף הבית וניתוח מעמיק לדף הכתבה.
 
-החזר JSON בפורמט הבא בלבד:
+החזר JSON בפורמט הבא בלבד (בדיוק {len(selected_pool)} כתבות במערך articles):
 {{
   "title": "כותרת העיתון (יצירתית, בעברית)",
   "intro": "פתיחה אישית קצרה ומחממת למשתמש (1-2 משפטים)",
@@ -265,31 +334,29 @@ class AIService:
     {{
       "title": "כותרת הכתבה בעברית",
       "topic": "נושא הכתבה",
-      "short_summary": "פסקה אחת של 2-3 משפטים. פסקה זו מסכמת מה הסיפור ומה הטייקאווי המרכזי שלו, ומעוררת סקרנות לקרוא עוד.",
+      "short_summary": "פסקה אחת של 2-3 משפטים. מסכמת את הסיפור ומעוררת סקרנות.",
       "why_it_matters": "למה זה חשוב — משפט אחד עד שניים, ממוקד ובעל ערך אמיתי.",
-      "personal_note": "הערה אישית רלוונטית למשתמש הספציפי, תוך התחשבות בגיל, תחומי עניין ורקע.",
-      "long_summary": "פסקה ראשונה — הקשר ורקע: הצב את האירוע בהקשרו הרחב. מה השתנה, מדוע זה חשוב עכשיו, ומהי המשמעות ההיסטורית, המדעית או התרבותית (3-4 משפטים).\\n\\nפסקה שנייה — פרטים ונתונים: פרט את הממצאים הטכניים, הנתונים הכמותיים, שמות הגופים המעורבים, ומה בדיוק הוכח, הוכרז או התרחש (3-4 משפטים). היה מדויק ועמוק — הקורא אינו מסתפק בשטחיות.\\n\\nפסקה שלישית — השלכות ועתיד: לאן זה מוביל, מה עשוי להשתנות, ומה הזווית הביקורתית שמי שמעמיק בתחום זה חייב להכיר (3-4 משפטים). אל תחזור על תוכן short_summary או why_it_matters.",
-      "personal_impact": "השפעה אישית: נתח כיצד חדשות זו קשורה ספציפית ל{user_name} — {family_info_input.strip()}. כתוב 2-3 משפטים בעברית מעמיקה ואקדמית, המחברים את הנושא לתחומי העניין שלה (מוזיקה חדשה, הופעות, טיולים בארץ, ספרות, שוק ההון).",
-      "image_keywords": "three descriptive English words capturing the visual essence of this story (e.g. 'music concert crowd' or 'hiking trail nature')",
-      "source_id": 3
+      "personal_note": "הערה אישית רלוונטית למשתמש הספציפי.",
+      "long_summary": "פסקה ראשונה — הקשר ורקע (3-4 משפטים).\\n\\nפסקה שנייה — פרטים ונתונים (3-4 משפטים).\\n\\nפסקה שלישית — השלכות ועתיד (3-4 משפטים). אל תחזור על short_summary.",
+      "personal_impact": "השפעה אישית על {user_name}: 2-3 משפטים המחברים את הנושא לתחומי עניינה.",
+      "image_keywords": "three descriptive English words for a photo (e.g. 'music concert crowd')",
+      "source_id": 1
     }}
   ]
 }}
 
 חוקים:
-- כתוב רק בעברית (למעט image_keywords שחייב להיות באנגלית)
-- source_id הוא מספר התוצאה המקורית מהרשימה למטה (מספר שלם)
-- short_summary: פסקה אחת קצרה (2-3 משפטים), לא רשימה, מעוררת סקרנות
-- why_it_matters: קצר, חד, שונה מ-short_summary
-- long_summary: בדיוק 3 פסקאות מופרדות ב-\\n\\n, לא חוזר על short_summary או why_it_matters
-- image_keywords: בדיוק 3 מילים באנגלית, ספציפיות וויזואליות (לדוגמה: "tennis serve stadium" ולא "sports news")
+- כתוב רק בעברית (למעט image_keywords — חייב באנגלית)
+- source_id = מספר הכתבה ברשימה למטה (1 עד {len(selected_pool)})
+- long_summary: בדיוק 3 פסקאות מופרדות ב-\\n\\n
+- image_keywords: בדיוק 3 מילים ספציפיות וויזואליות באנגלית
 
 שם המשתמש: {user_name}
 תחומי עניין: {user_text_input}
 רקע אישי: {family_info_input}
 סגנון כתיבה: {writing_style_input}
 
-תוצאות חיפוש:
+כתבות לכתיבה:
 {chr(10).join(context_lines)}
         """
 
@@ -307,12 +374,12 @@ class AIService:
 
         for article in newspaper_data.get("articles", []):
             source_id = article.get("source_id")
-            if isinstance(source_id, int) and 1 <= source_id <= len(tavily_results):
-                source = tavily_results[source_id - 1]
+            # source_id now refers to position within selected_pool (1-based)
+            if isinstance(source_id, int) and 1 <= source_id <= len(selected_pool):
+                source = selected_pool[source_id - 1]
                 article["url"] = source.get("url", "")
                 article["source_name"] = source.get("source_name", "")
                 article["country_origin"] = source.get("country_origin", "")
-                # Prefer Tavily image; fall back to Unsplash keyword search
                 tavily_img = source.get("image", "").strip()
                 article["image"] = tavily_img if tavily_img else _unsplash_url(article)
             else:

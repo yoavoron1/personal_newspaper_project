@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+from urllib.parse import quote
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -37,6 +38,14 @@ def load_cached_newspaper() -> Optional[Tuple[Dict, List[Dict]]]:
         return None
 
 
+def _build_unsplash_url(article: Dict, width: int = 800, height: int = 600) -> str:
+    """Builds a dynamic Unsplash URL from image_keywords or topic."""
+    raw = (article.get("image_keywords") or article.get("topic") or "news world").strip()
+    words = [w.strip(".,;:") for w in raw.split() if w.strip()][:4]
+    slug = quote(",".join(words), safe=",")
+    return f"https://source.unsplash.com/featured/{width}x{height}/?{slug}"
+
+
 def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List[Dict]:
     enriched = []
     for idx, article in enumerate(newspaper_data.get("articles", [])):
@@ -45,9 +54,11 @@ def enrich_articles(newspaper_data: Dict, selected_articles: List[Dict]) -> List
         item["id"] = idx
         # New Tavily flow: fields already embedded; old NewsAPI flow: fall back to source
         item["url"] = item.get("url") or source.get("url", "")
-        item["image"] = item.get("image") or source.get("image", "")
         item["source_name"] = item.get("source_name") or source.get("source_name", "")
         item["country_origin"] = item.get("country_origin") or source.get("country_origin", "")
+        # Resolve image: Tavily direct → source image → dynamic Unsplash keyword URL
+        img = item.get("image") or source.get("image", "")
+        item["image"] = img if img else _build_unsplash_url(item)
         # short_summary (new): paragraph text for homepage cards
         item.setdefault("short_summary", "")
         # bullets (legacy): keep for old-cache backward compatibility

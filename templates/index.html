@@ -267,6 +267,16 @@
         background: linear-gradient(135deg, #DDD8CC 0%, #CAC4B6 100%);
       }
 
+      /* 2-column article grid */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.35rem;
+      }
+      @media (max-width: 600px) {
+        .cards-grid { grid-template-columns: 1fr; }
+      }
+
       /* Coming soon animation */
       @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
       .bounce-dot { animation: bounce 1.2s ease-in-out infinite; }
@@ -311,6 +321,8 @@
 
       <!-- ═══ HERO ARTICLE ═══ -->
       {% set hero = articles[0] %}
+      {% set _hero_kw = (hero.image_keywords or hero.topic or 'news world') | replace(' ', ',') %}
+      {% set _hero_fallback = 'https://source.unsplash.com/featured/1200x600/?' + _hero_kw %}
       <div style="margin-top:2.5rem;">
         <div class="section-divider">
           <span class="line"></span>
@@ -328,10 +340,10 @@
         >
           <div style="aspect-ratio:16/7; overflow:hidden; background:var(--card-border);">
             <img
-              src="{{ hero.image or 'https://source.unsplash.com/featured/800x500/?news,journalism' }}"
+              src="{{ hero.image or _hero_fallback }}"
               alt="{{ hero.title }}"
               style="width:100%; height:100%; object-fit:cover; display:block;"
-              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop&q=80'"
+              onerror="this.onerror=null; this.src='{{ _hero_fallback }}'"
             />
           </div>
 
@@ -400,8 +412,10 @@
         <span class="line"></span>
       </div>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr)); gap:1.25rem;">
+      <div class="cards-grid">
         {% for article in articles[1:] %}
+        {% set _kw = (article.image_keywords or article.topic or 'news world') | replace(' ', ',') %}
+        {% set _fallback = 'https://source.unsplash.com/featured/800x600/?' + _kw %}
         <article
           class="article-card card-link"
           style="display:flex; flex-direction:column;"
@@ -413,10 +427,10 @@
         >
           <div style="aspect-ratio:16/9; overflow:hidden; flex-shrink:0; background:var(--card-border);">
             <img
-              src="{{ article.image or 'https://source.unsplash.com/featured/800x500/?news,journalism' }}"
+              src="{{ article.image or _fallback }}"
               alt="{{ article.title }}"
               style="width:100%; height:100%; object-fit:cover; display:block;"
-              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop&q=80'"
+              onerror="this.onerror=null; this.src='{{ _fallback }}'"
             />
           </div>
 
