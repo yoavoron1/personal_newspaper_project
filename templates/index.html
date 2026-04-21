@@ -4,485 +4,182 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Assistant:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Heebo:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --navy:          #1A202C;
-        --navy-mid:      #2D3748;
-        --bronze:        #9C7A3C;
-        --champagne:     #D4CBB3;
-        --bronze-light:  #EDE5D0;
-        --bronze-bg:     #EDF2F7;
-        --page-bg:       #F8F9FA;
-        --card-bg:       #FFFFFF;
-        --card-border:   #E2E8F0;
-        --ink:           #1A202C;
-        --ink-mid:       #3D3830;
-        --muted:         #7C7268;
-        --divider:       #E2E8F0;
-        --slate:         #64748B;
-      }
-
-      * { box-sizing: border-box; }
-
-      body {
-        font-family: "Heebo", "Assistant", system-ui, sans-serif;
-        background-color: var(--page-bg);
-        color: var(--ink);
-        -webkit-font-smoothing: antialiased;
-        position: relative;
-      }
-
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background: url('/static/images/bg.jpg') center center / cover no-repeat;
-        opacity: 0.15;
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      /* Masthead */
-      .masthead {
-        background: radial-gradient(ellipse 90% 130% at 50% 40%, #2C3A50 0%, #162236 45%, #111827 100%);
-        color: #fff;
-        padding: 2.25rem 1.5rem 1.75rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        border-bottom: 1px solid rgba(232,228,216,0.10);
-      }
-      /* Pearl/cream spotlight — tight central glow, fades quickly */
-      .masthead::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(ellipse 55% 65% at 50% 38%,
-            rgba(255,253,245,0.13) 0%,
-            rgba(255,251,237,0.04) 40%,
-            transparent 68%);
-        pointer-events: none;
-      }
-      /* Champagne accent line at the bottom */
-      .masthead::after {
-        content: '';
-        position: absolute;
-        bottom: 0; left: 0; right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, rgba(212,203,179,0.50) 35%, rgba(212,203,179,0.50) 65%, transparent);
-      }
-      .masthead-eyebrow {
-        font-size: 0.65rem;
-        letter-spacing: 0.35em;
-        text-transform: uppercase;
-        color: rgba(203,213,225,0.50);
-        margin-bottom: 0.6rem;
-      }
-      .masthead-title {
-        font-size: clamp(2rem, 7vw, 3.8rem);
-        font-weight: 900;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        color: #fff;
-      }
-      .masthead-rule {
-        width: 3rem;
-        height: 2px;
-        background: var(--champagne);
-        margin: 1rem auto 0.8rem;
-        border-radius: 9999px;
-        opacity: 0.85;
-      }
-      .masthead-intro {
-        font-size: 1rem;
-        color: rgba(209,213,219,0.65);
-        max-width: 540px;
-        margin: 0 auto;
-        font-weight: 400;
-        line-height: 1.65;
-      }
-      .masthead-dateline {
-        font-size: 0.68rem;
-        letter-spacing: 0.22em;
-        color: rgba(237,229,208,0.35);
-        margin-top: 1.2rem;
-        text-transform: uppercase;
-      }
-
-      /* Divider */
-      .section-divider {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin: 2.5rem 0 1.5rem;
-      }
-      .section-divider span.line { flex: 1; height: 1px; background: var(--divider); }
-      .section-divider span.label {
-        font-size: 0.68rem;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--muted);
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      /* Article card */
-      .article-card {
-        background: var(--card-bg);
-        border-radius: 1.25rem;
-        overflow: hidden;
-        border: 1px solid var(--card-border);
-        box-shadow: 0 1px 4px rgba(28,43,58,0.04), 0 0 0 0 transparent;
-        transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
-      }
-      .article-card:hover {
-        border-color: #CBD5E0;
-        box-shadow: 0 6px 24px rgba(26,32,44,0.09);
-        transform: translateY(-2px);
-      }
-
-      /* Topic tag */
-      .topic-tag {
-        display: inline-block;
-        background: var(--navy);
-        color: rgba(237,229,208,0.92);
-        font-size: 0.62rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        padding: 0.28rem 0.75rem;
-        border-radius: 9999px;
-      }
-
-      /* Bullets */
-      .bullet-list { list-style: none; padding: 0; margin: 0; }
-      .bullet-list li {
-        display: flex;
-        gap: 0.65rem;
-        align-items: flex-start;
-        padding: 0.4rem 0;
-        font-size: 1rem;
-        line-height: 1.6;
-        color: var(--ink-mid);
-        border-bottom: 1px solid var(--card-border);
-      }
-      .bullet-list li:last-child { border-bottom: none; }
-      .bullet-dot {
-        flex-shrink: 0;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--bronze);
-        margin-top: 0.48rem;
-        opacity: 0.8;
-      }
-
-      /* Why it matters */
-      .why-box {
-        background: var(--bronze-bg);
-        border-right: 3px solid #64748B;
-        border-radius: 0.75rem;
-        padding: 0.85rem 1rem;
-        margin-top: 1rem;
-      }
-      .why-label {
-        font-size: 0.65rem;
-        font-weight: 800;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: #64748B;
-        margin-bottom: 0.3rem;
-      }
-      .why-text {
-        font-size: 0.95rem;
-        color: var(--ink-mid);
-        line-height: 1.58;
-        font-weight: 500;
-      }
-
-      /* Personal note */
-      .personal-note {
-        font-size: 0.88rem;
-        color: var(--muted);
-        font-style: italic;
-        margin-top: 0.9rem;
-        padding-top: 0.9rem;
-        border-top: 1px dashed var(--divider);
-        line-height: 1.58;
-      }
-
-      /* Read more link */
-      .read-more {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: var(--navy);
-        text-decoration: none;
-        margin-top: 1rem;
-        transition: color 0.15s;
-        position: relative;
-        z-index: 1;
-      }
-      .read-more:hover { color: var(--slate); }
-      .read-more svg { transition: transform 0.15s; }
-      .read-more:hover svg { transform: translateX(-3px); }
-
-      /* Clickable card */
-      .card-link { cursor: pointer; }
-      .card-link:hover {
-        box-shadow: 0 8px 28px rgba(26,32,44,0.11);
-        transform: translateY(-3px);
-        border-color: #CBD5E0;
-      }
-      .card-link:focus-visible {
-        outline: 2px solid var(--bronze);
-        outline-offset: 3px;
-      }
-      .deep-dive-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.3rem;
-        font-size: 0.68rem;
-        font-weight: 700;
-        color: rgba(237,229,208,0.8);
-        background: var(--navy);
-        border: 1px solid rgba(237,229,208,0.15);
-        padding: 0.26rem 0.65rem;
-        border-radius: 9999px;
-        letter-spacing: 0.08em;
-      }
-
-      /* Hero image bg */
-      .img-placeholder {
-        background: linear-gradient(135deg, #DDD8CC 0%, #CAC4B6 100%);
-      }
-
-      /* 2-column article grid */
-      .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.35rem;
-      }
-      @media (max-width: 600px) {
-        .cards-grid { grid-template-columns: 1fr; }
-      }
-
-      /* Coming soon animation */
-      @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-      .bounce-dot { animation: bounce 1.2s ease-in-out infinite; }
-      .bounce-dot:nth-child(2) { animation-delay: 0.15s; }
-      .bounce-dot:nth-child(3) { animation-delay: 0.3s; }
-    </style>
+    <link rel="stylesheet" href="/static/css/newspaper.css" />
   </head>
 
   <body>
-    <!-- ═══ MASTHEAD ═══ -->
-    <header class="masthead">
-      <p class="masthead-eyebrow">עיתון אישי &bull; מהדורה שבועית</p>
-      <h1 class="masthead-title">{{ title }}</h1>
-      <div class="masthead-rule"></div>
-      {% if intro %}
-      <p class="masthead-intro">{{ intro }}</p>
-      {% endif %}
-      <p class="masthead-dateline">{{ "today" | default("") }}</p>
-    </header>
 
-    <main style="max-width:900px; margin:0 auto; padding:0 1rem 4rem;">
+    <!-- ═══ TOP NAV ═══ -->
+    <nav class="topnav">
+      <a href="/dashboard" class="brand">
+        <span class="brand-mark">T</span>
+        <span class="brand-name">The Personal Times</span>
+      </a>
+      <div class="topnav-actions">
+        <a href="/logout" class="topnav-link">התנתקות</a>
+      </div>
+    </nav>
+
+    <main class="page-wide">
+
+      <!-- ═══ WELCOME HEADER ═══ -->
+      <header style="margin: 1rem 0 2rem;">
+        <span class="eyebrow">מהדורה שבועית · גיליון אישי</span>
+        <h1 class="page-title">{{ title }}</h1>
+        {% if intro %}
+        <p class="page-subtitle">{{ intro }}</p>
+        {% endif %}
+      </header>
 
       <!-- ═══ COMING SOON ═══ -->
       {% if coming_soon %}
-      <section style="margin-top:4rem; display:flex; justify-content:center;">
-        <div class="article-card" style="padding:3.5rem 2rem; text-align:center; max-width:480px; width:100%;">
-          <div style="font-size:3.5rem; margin-bottom:1rem;">📰</div>
-          <h2 style="font-size:1.6rem; font-weight:900; color:var(--navy); margin-bottom:0.5rem;">העיתון הבא בדרך…</h2>
-          <p style="color:var(--muted); font-size:1rem; line-height:1.6; max-width:320px; margin:0 auto 2rem;">
-            העיתון האישי שלך נוצר עבורך במיוחד וישלח גם למייל.
-          </p>
-          <div style="display:flex; justify-content:center; gap:0.5rem;">
-            <span class="bounce-dot" style="width:10px;height:10px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
-            <span class="bounce-dot" style="width:10px;height:10px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
-            <span class="bounce-dot" style="width:10px;height:10px;border-radius:50%;background:var(--navy);display:inline-block;"></span>
-          </div>
+      <section class="empty-state">
+        <div class="empty-state-icon">📰</div>
+        <h2>העיתון האישי שלך בהכנה…</h2>
+        <p>העיתון האישי שלך נוצר עבורך עכשיו. המתן רגע ורענן את הדף.</p>
+        <div>
+          <span class="bounce-dot"></span>
+          <span class="bounce-dot"></span>
+          <span class="bounce-dot"></span>
         </div>
       </section>
       {% endif %}
 
       {% if articles and articles|length > 0 %}
 
-      <!-- ═══ HERO ARTICLE ═══ -->
+      <!-- ═══ SECTION: FEATURED ═══ -->
+      <div class="section-head">
+        <h2>כתבת השבוע</h2>
+        <span class="section-caption">הסיפור שבחרו לך העורכים</span>
+      </div>
+
       {% set hero = articles[0] %}
       {% set _hero_kw = (hero.image_keywords or hero.topic or 'news world') | replace(' ', ',') %}
-      {% set _hero_fallback = 'https://source.unsplash.com/featured/1200x600/?' + _hero_kw %}
-      <div style="margin-top:2.5rem;">
-        <div class="section-divider">
-          <span class="line"></span>
-          <span class="label">הכתבה הראשית</span>
-          <span class="line"></span>
+      {% set _hero_fallback = 'https://source.unsplash.com/featured/1200x700/?' + _hero_kw %}
+
+      <article
+        class="article-hero"
+        onclick="window.location.href='/article/0'"
+        role="link"
+        tabindex="0"
+        onkeydown="if(event.key==='Enter')window.location.href='/article/0'"
+        aria-label="קרא כתבה: {{ hero.title }}"
+      >
+        <div class="article-thumb">
+          <img
+            src="{{ hero.image or _hero_fallback }}"
+            alt="{{ hero.title }}"
+            onerror="this.onerror=null; this.src='{{ _hero_fallback }}'"
+          />
         </div>
 
-        <article
-          class="article-card card-link"
-          onclick="window.location.href='/article/0'"
-          role="link"
-          tabindex="0"
-          onkeydown="if(event.key==='Enter')window.location.href='/article/0'"
-          aria-label="קרא כתבה: {{ hero.title }}"
-        >
-          <div style="aspect-ratio:16/7; overflow:hidden; background:var(--card-border);">
-            <img
-              src="{{ hero.image or _hero_fallback }}"
-              alt="{{ hero.title }}"
-              style="width:100%; height:100%; object-fit:cover; display:block;"
-              onerror="this.onerror=null; this.src='{{ _hero_fallback }}'"
-            />
+        <div class="article-body">
+          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            {% if hero.topic %}
+            <span class="tag">{{ hero.topic }}</span>
+            {% endif %}
+            <span class="tag tag-outline">כתבה ראשית</span>
           </div>
 
-          <div style="padding:1.75rem 1.5rem 1.75rem;">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
-              {% if hero.topic %}
-              <span class="topic-tag">{{ hero.topic }}</span>
+          <h3 class="article-title">{{ hero.title }}</h3>
+
+          {% if hero.short_summary %}
+          <p class="article-excerpt" style="-webkit-line-clamp:5;">{{ hero.short_summary }}</p>
+          {% elif hero.summary %}
+          <p class="article-excerpt" style="-webkit-line-clamp:5;">{{ hero.summary }}</p>
+          {% elif hero.bullets and hero.bullets|length > 0 %}
+          <p class="article-excerpt" style="-webkit-line-clamp:5;">{{ hero.bullets|join(' · ') }}</p>
+          {% endif %}
+
+          {% if hero.why_it_matters %}
+          <div class="callout">
+            <p class="callout-label">למה זה חשוב</p>
+            <p class="callout-text">{{ hero.why_it_matters }}</p>
+          </div>
+          {% endif %}
+
+          <div class="article-meta">
+            <span>
+              {% if hero.source_name %}
+              <span class="source">{{ hero.source_name }}</span>
+              {% if hero.country_origin %}<span class="source-alt"> · {{ hero.country_origin }}</span>{% endif %}
+              {% else %}
+              <span class="source-alt">העורך האישי שלך</span>
               {% endif %}
-              <span style="font-size:0.78rem; color:var(--muted);">כתבה ראשית</span>
-              <span class="deep-dive-badge" style="margin-right:auto;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                קרא כתבה מלאה
-              </span>
-            </div>
-
-            <h2 style="font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:var(--navy); line-height:1.25; margin-bottom:0.4rem;">
-              {{ hero.title }}
-            </h2>
-
-            {% if hero.source_name %}
-            <p style="font-size:0.8rem; color:var(--muted); margin-bottom:1.1rem; letter-spacing:0.02em;">{{ hero.source_name }}{% if hero.country_origin %} &nbsp;·&nbsp; {{ hero.country_origin }}{% endif %}</p>
-            {% endif %}
-
-            {% if hero.short_summary %}
-            <p style="font-size:1.05rem; line-height:1.78; color:var(--ink-mid); margin-bottom:1rem;">{{ hero.short_summary }}</p>
-            {% elif hero.bullets and hero.bullets|length > 0 %}
-            <ul class="bullet-list">
-              {% for bullet in hero.bullets %}
-              <li><span class="bullet-dot"></span><span>{{ bullet }}</span></li>
-              {% endfor %}
-            </ul>
-            {% elif hero.summary %}
-            <p style="font-size:1.05rem; line-height:1.78; color:var(--ink-mid);">{{ hero.summary }}</p>
-            {% endif %}
-
-            {% if hero.why_it_matters %}
-            <div class="why-box">
-              <p class="why-label">למה זה חשוב</p>
-              <p class="why-text">{{ hero.why_it_matters }}</p>
-            </div>
-            {% endif %}
-
-            {% if hero.url %}
-            <a
-              href="{{ hero.url }}"
-              target="_blank"
-              rel="noopener"
-              class="read-more"
-              onclick="event.stopPropagation()"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              מקור מלא
-            </a>
-            {% endif %}
+            </span>
+            <span style="display:inline-flex; align-items:center; gap:0.35rem; color:var(--primary); font-weight:600;">
+              קרא כתבה
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="transform: scaleX(-1);"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
 
       {% endif %}
 
-      <!-- ═══ MORE STORIES ═══ -->
+      <!-- ═══ SECTION: MORE STORIES ═══ -->
       {% if articles and articles|length > 1 %}
-      <div class="section-divider" style="margin-top:3rem;">
-        <span class="line"></span>
-        <span class="label">עוד כתבות עבורך</span>
-        <span class="line"></span>
+      <div class="section-head" style="margin-top:3.5rem;">
+        <h2>עוד עבורך</h2>
+        <span class="section-caption">{{ articles|length - 1 }} כתבות נוספות</span>
       </div>
 
-      <div class="cards-grid">
+      <div class="grid-2">
         {% for article in articles[1:] %}
         {% set _kw = (article.image_keywords or article.topic or 'news world') | replace(' ', ',') %}
         {% set _fallback = 'https://source.unsplash.com/featured/800x600/?' + _kw %}
         <article
-          class="article-card card-link"
-          style="display:flex; flex-direction:column;"
+          class="article-card"
           onclick="window.location.href='/article/{{ article.id }}'"
           role="link"
           tabindex="0"
           onkeydown="if(event.key==='Enter')window.location.href='/article/{{ article.id }}'"
           aria-label="קרא כתבה: {{ article.title }}"
         >
-          <div style="aspect-ratio:16/9; overflow:hidden; flex-shrink:0; background:var(--card-border);">
+          <div class="article-thumb">
             <img
               src="{{ article.image or _fallback }}"
               alt="{{ article.title }}"
-              style="width:100%; height:100%; object-fit:cover; display:block;"
               onerror="this.onerror=null; this.src='{{ _fallback }}'"
             />
           </div>
 
-          <div style="padding:1.25rem 1.25rem 1.25rem; flex:1; display:flex; flex-direction:column;">
-            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.85rem; flex-wrap:wrap;">
-              {% if article.topic %}
-              <span class="topic-tag">{{ article.topic }}</span>
-              {% endif %}
+          <div class="article-body">
+            {% if article.topic %}
+            <div>
+              <span class="tag">{{ article.topic }}</span>
             </div>
-
-            <h3 style="font-size:1.15rem; font-weight:800; color:var(--navy); line-height:1.3; margin-bottom:0.3rem;">
-              {{ article.title }}
-            </h3>
-
-            {% if article.source_name %}
-            <p style="font-size:0.78rem; color:var(--muted); margin-bottom:0.85rem; letter-spacing:0.02em;">{{ article.source_name }}{% if article.country_origin %} &nbsp;·&nbsp; {{ article.country_origin }}{% endif %}</p>
             {% endif %}
+
+            <h3 class="article-title">{{ article.title }}</h3>
 
             {% if article.short_summary %}
-            <p style="font-size:0.95rem; line-height:1.72; color:var(--ink-mid); flex:1;">{{ article.short_summary }}</p>
-            {% elif article.bullets and article.bullets|length > 0 %}
-            <ul class="bullet-list" style="flex:1;">
-              {% for bullet in article.bullets %}
-              <li style="font-size:0.92rem;"><span class="bullet-dot"></span><span>{{ bullet }}</span></li>
-              {% endfor %}
-            </ul>
+            <p class="article-excerpt">{{ article.short_summary }}</p>
             {% elif article.summary %}
-            <p style="font-size:0.95rem; line-height:1.72; color:var(--ink-mid); flex:1;">{{ article.summary }}</p>
+            <p class="article-excerpt">{{ article.summary }}</p>
+            {% elif article.bullets and article.bullets|length > 0 %}
+            <p class="article-excerpt">{{ article.bullets|join(' · ') }}</p>
             {% endif %}
 
-            {% if article.why_it_matters %}
-            <div class="why-box" style="margin-top:0.9rem;">
-              <p class="why-label">למה זה חשוב</p>
-              <p class="why-text">{{ article.why_it_matters }}</p>
-            </div>
-            {% endif %}
-
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:1rem; position:relative; z-index:1;">
-              <span style="font-size:0.75rem; font-weight:700; color:var(--slate); letter-spacing:0.04em;">לחץ לקריאה מלאה ←</span>
-              {% if article.url %}
-              <a
-                href="{{ article.url }}"
-                target="_blank"
-                rel="noopener"
-                class="read-more"
-                style="margin-top:0;"
-                onclick="event.stopPropagation()"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                מקור
-              </a>
-              {% endif %}
+            <div class="article-meta">
+              <span>
+                {% if article.source_name %}
+                <span class="source">{{ article.source_name }}</span>
+                {% if article.country_origin %}<span class="source-alt"> · {{ article.country_origin }}</span>{% endif %}
+                {% else %}
+                <span class="source-alt">העורך האישי שלך</span>
+                {% endif %}
+              </span>
+              <span style="display:inline-flex; align-items:center; gap:0.3rem; color:var(--primary); font-weight:600; font-size:0.78rem;">
+                המשך
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform: scaleX(-1);"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
             </div>
           </div>
         </article>
@@ -492,9 +189,8 @@
 
     </main>
 
-    <!-- ═══ FOOTER ═══ -->
-    <footer style="background:linear-gradient(160deg,#1C2B3A 0%,#162236 100%); color:rgba(237,229,208,0.4); text-align:center; padding:1.75rem 1rem; font-size:0.72rem; letter-spacing:0.15em; border-top:1px solid rgba(232,228,216,0.08);">
-      עיתון אישי &bull; נוצר באמצעות AI &bull; לשימוש אישי בלבד
+    <footer class="site-footer">
+      The Personal Times · נוצר באמצעות AI · לשימוש אישי בלבד
     </footer>
   </body>
 </html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subscribe — The Personal Times</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/newspaper.css" />
+  </head>
+
+  <body>
+    <nav class="topnav">
+      <a href="/" class="brand">
+        <span class="brand-mark">T</span>
+        <span class="brand-name">The Personal Times</span>
+      </a>
+      <div class="topnav-actions">
+        <a href="/login" class="topnav-link">Already a member? Sign in</a>
+      </div>
+    </nav>
+
+    <main class="page" style="max-width: 620px;">
+      <div class="form-card" style="max-width: 620px;">
+        <div class="form-header">
+          <span class="eyebrow">Subscribe</span>
+          <h1>Create your account.</h1>
+          <p class="form-sub">Tell us a little about yourself — your first edition is just a week away.</p>
+        </div>
+
+        {% if error %}
+        <div class="alert" role="alert">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <form method="post" action="/register" novalidate>
+          <div class="field">
+            <label class="field-label" for="full_name">Full Name <span class="required">*</span></label>
+            <input
+              class="field-input"
+              type="text"
+              id="full_name"
+              name="full_name"
+              placeholder="Jane Doe"
+              required
+              autocomplete="name"
+              autofocus
+            />
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="email">Email <span class="required">*</span></label>
+            <input
+              class="field-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="field" style="margin-bottom:1.6rem;">
+            <label class="field-label" for="password">
+              Password <span class="required">*</span>
+              <span class="field-hint">(at least 8 characters)</span>
+            </label>
+            <input
+              class="field-input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            />
+          </div>
+
+          <div class="field" style="margin-bottom:2rem;">
+            <label class="field-label" style="margin-bottom:0.15rem;">Interests</label>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin:0 0 0.85rem;">
+              Select the sections you'd like us to cover.
+            </p>
+
+            <div class="chip-grid">
+              {% set interests = ['Technology','Sports','Finance','Health','Politics','Science','Culture','Business'] %}
+              {% for item in interests %}
+              <label class="chip">
+                <input type="checkbox" name="interests" value="{{ item }}" />
+                <span class="chip-face">{{ item }}</span>
+              </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">
+            Subscribe
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+
+          <p class="form-meta">
+            Already a subscriber?<a href="/login">Sign in</a>
+          </p>
+        </form>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      The Personal Times · A Private Press
+    </footer>
+  </body>
+</html>
